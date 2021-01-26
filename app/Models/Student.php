@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class Students extends Model
+class Student extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -16,7 +16,6 @@ class Students extends Model
         'lastnames',
         'dni',
         'birthdate',
-        'dni',
         'area',
         'aptitudes'
     ];
