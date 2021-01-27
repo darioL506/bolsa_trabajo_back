@@ -4,23 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use DateTime;
 
 class StudentController extends Controller
 {
     public function insertStudents(Request $request) {
-
-        //$json = json_decode($request->all());
-        $student = Student::create($request->all());
-
-        /*$st = new Student();
+        
+        $st = new Student();
         $st->name = $request->get('name');
-        $st->lastnames = $request->get('lastnames');
+        $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
-        $st->dni = $request->get('birthdate');
+        $st->birthdate = implode("-",$request->get('birthdate'));
         $st->area = $request->get('area');
-        $st->aptitudes = $request->get('aptitudes');*/
+        $st->aptitudes = $request->get('aptitudes');
+        $st->save();
 
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $student], 201);
+        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st ], 201);
 
     }
 }
