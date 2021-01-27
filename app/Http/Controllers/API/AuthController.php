@@ -15,7 +15,6 @@ class AuthController extends Controller
         }
         
         $validatedData = [
-            'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
         ];
