@@ -15,7 +15,10 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e5a3e9... Merge branch 'feature/userLogin' into develop
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

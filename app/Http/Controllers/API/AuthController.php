@@ -16,7 +16,10 @@ class AuthController extends Controller
         }
 
         $validatedData = [
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e5a3e9... Merge branch 'feature/userLogin' into develop
             'email' => $request->get('email'),
             'password' => $request->get('password'),
         ];
