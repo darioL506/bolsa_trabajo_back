@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use app\Models\User;
 
 class AuthController extends Controller
 {
@@ -13,9 +14,9 @@ class AuthController extends Controller
         if (User::where('email', $request->get('email'))->count() == 1) {
             return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
         }
-        
+
         $validatedData = [
-            'name' => $request->get('name'),
+
             'email' => $request->get('email'),
             'password' => $request->get('password'),
         ];
