@@ -18,10 +18,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-<<<<<<< HEAD
-
-=======
->>>>>>> 4e5a3e9... Merge branch 'feature/userLogin' into develop
         'email',
         'password',
     ];
