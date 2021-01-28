@@ -39,4 +39,19 @@ class OfferController extends Controller
         //return response()->json($article, 201);
     }
 
+    // Método para actualizar una oferta
+    public function update(Request $request, $offer) {
+        // Comprobamos si la oferta existe.
+        $offer = Offer::find($offer);
+
+        // Si no existe esa oferta devolvemos un error.
+        if (!$offer) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra una oferta con ese código.'])], 404);
+        }
+
+        $offer->update($request->all());
+
+        return response()->json($offer, 200);
+    }
+
 }
