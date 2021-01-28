@@ -36,7 +36,6 @@ class OfferController extends Controller
     public function store(Request $request) {
         $offer = Offer::create($request->all());
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $offer], 201);
-        //return response()->json($article, 201);
     }
 
     // Método para actualizar una oferta
@@ -52,6 +51,22 @@ class OfferController extends Controller
         $offer->update($request->all());
 
         return response()->json($offer, 200);
+    }
+
+    // Método para borrar oferta
+    public function delete($offer) {
+        // Comprobamos si la oferta existe.
+        $offer = Offer::find($offer);
+
+        // Si no existe esa oferta devolvemos un error.
+        if (!$offer) {
+
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra un artículo con ese código ' . $offer])], 404);
+        }
+
+        $offer->delete();
+
+        return response()->json(['code' => 200, 'message' => 'Artículo ' . $offer . ' borrado.'], 200);
     }
 
 }
