@@ -23,7 +23,7 @@ class StudentController extends Controller
 
     }
 
-    public  function  updateStudents(Request $request, $student) {
+    public function updateStudents(Request $request, $student) {
 
         $alumno = Student::find($student);
 
@@ -42,4 +42,19 @@ class StudentController extends Controller
         //return response()->json(['status'=>'ok','data'=>$fabricante],200);
         return response()->json($alumno, 200);
     }
+    public function deleteStudent($student) {
+
+        $alumno = Student::find($student);
+
+
+        if (!$alumno) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra un artículo con ese código ' . $alumno])], 404);
+        }
+
+        $alumno->delete();
+
+        return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' borrado.'], 200);
+    }
 }
+
+
