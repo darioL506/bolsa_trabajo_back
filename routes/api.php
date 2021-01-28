@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => 'auth:api'], function() {
+    // Rutas para ofertas
+    Route::get('offers', [OfferController::class, 'index']);
+
+    
+    //Route::get('articles/{article}', [ArticleController::class, 'show']);
+    //Route::post('articles', [ArticleController::class, 'store']);
+    //Route::put('articles/{article}', [ArticleController::class, 'update']);
+    //Route::delete('articles/{article}', [ArticleController::class, 'delete']);
+});
