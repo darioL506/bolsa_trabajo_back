@@ -17,6 +17,7 @@ class StudentController extends Controller
         $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
         $st->birthdate = implode("-",$request->get('birthdate'));
+        $st->phone = $request->get('phone');
         $st->area = $request->get('area');
         $st->aptitudes = $request->get('aptitudes');
         $st->save();
@@ -37,6 +38,7 @@ class StudentController extends Controller
         $alumno->lastnames = $request->get('lastName');
         $alumno->dni = $request->get('dni');
         $alumno->birthdate = implode("-",$request->get('birthdate'));
+        $st->phone = $request->get('phone');
         $alumno->area = $request->get('area');
         $alumno->aptitudes = $request->get('aptitudes');
 
@@ -61,6 +63,15 @@ class StudentController extends Controller
     public function getAll() {
         $data = json_encode(Student::all());
         return response()->json($data,200);
+    }
+
+    public function get($student) {
+        $alumno = Student::find($student);
+        if(!$alumno) {
+            return response()->json(['code' => 404, 'message' => 'No se encuentra el alumno ' . $student], 404);
+        }
+        $data = json_encode($alumno);
+        return response()->json(['code' => 200, $data], 200);
     }
 }
 
