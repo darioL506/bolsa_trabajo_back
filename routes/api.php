@@ -40,3 +40,4 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::post('student/insert',[StudentController::class,'insertStudents']);
 Route::put('student/{student}', [StudentController::class, 'updateStudents']);
 Route::delete('student/{student}', [StudentController::class, 'deleteStudent']);
+Route::get('student/all',[StudentController::class, 'getAll']);

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use DateTime;
+use PHPUnit\Util\Json;
 
 class StudentController extends Controller
 {
@@ -54,6 +56,11 @@ class StudentController extends Controller
         $alumno->delete();
 
         return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' borrado.'], 200);
+    }
+
+    public function getAll() {
+        $data = json_encode(Student::all());
+        return response()->json($data,200);
     }
 }
 
