@@ -20,6 +20,11 @@ class CreateOffersTable extends Migration
             $table->date('startDate');
             $table->date('endDate');
             $table->string('description', 200);
+            $table->boolean('isActive')->default(0);
+            $table->foreignId('company_id')
+                    ->constrained('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
 
             // Faltaria porner el id de la empresa y el ciclo al que pertenece la oferta

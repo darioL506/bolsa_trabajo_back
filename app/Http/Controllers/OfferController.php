@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class OfferController extends Controller
 {
 
-    public function user(Request $request)
+    public function offer(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json($request->offer());
     }
 
     // Método que devuelve todas las ofertas
