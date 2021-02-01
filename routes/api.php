@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
 });
+
+Route::post('student/insert',[StudentController::class,'insertStudents']);
