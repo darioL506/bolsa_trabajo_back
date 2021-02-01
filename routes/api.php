@@ -36,3 +36,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
 
 Route::post('student/insert',[StudentController::class,'insertStudents']);
+Route::put('student/update/{student}', [StudentController::class, 'updateStudents']);
+Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
+Route::get('student/get-all',[StudentController::class, 'getAll']);
+Route::get('student/get/{student}',[StudentController::class, 'get']);
