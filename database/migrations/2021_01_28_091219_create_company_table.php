@@ -15,10 +15,10 @@ class CreateCompanyTable extends Migration
     {
         Schema::create('company', function (Blueprint $table) {
             $table->id();
-            $table->cif();
-            $table->name();
-            $table->section();
-            $table->description();
+            $table->string('cif',9)->unique();
+            $table->string('name',250);
+            $table->string('section',250);
+            $table->string('description',500);
             $table->timestamps();
 
 
