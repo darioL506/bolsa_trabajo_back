@@ -14,7 +14,7 @@ class OfferSeeder extends Seeder
     public function run()
     {
         $fak = \Faker\Factory::create('es_ES');
-        for($i=1;$i<=10;$i++){
+        /*for($i=1;$i<=10;$i++){
             $o = new \App\Models\Offer;
             $o->name = $fak->catchPhrase;
             $o->vacant = $fak->numberBetween(1, 20);
@@ -22,6 +22,6 @@ class OfferSeeder extends Seeder
             $o->endDate = $fak->date;
             $o->description = $fak->text($maxNbChars = 200);
             $o->save();
-        }
+        }*/
     }
 }

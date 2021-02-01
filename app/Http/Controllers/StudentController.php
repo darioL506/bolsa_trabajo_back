@@ -16,6 +16,7 @@ class StudentController extends Controller
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
+        $st->user_id = $request->get('user_id');
         $st->birthdate = implode("-",$request->get('birthdate'));
         $st->phone = $request->get('phone');
         $st->area = $request->get('area');
@@ -37,8 +38,9 @@ class StudentController extends Controller
         $alumno->name = $request->get('name');
         $alumno->lastnames = $request->get('lastName');
         $alumno->dni = $request->get('dni');
+        $alumno->user_id = $request->get('user_id');
         $alumno->birthdate = implode("-",$request->get('birthdate'));
-        $st->phone = $request->get('phone');
+        $alumno->phone = $request->get('phone');
         $alumno->area = $request->get('area');
         $alumno->aptitudes = $request->get('aptitudes');
 
