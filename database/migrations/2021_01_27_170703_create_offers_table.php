@@ -26,9 +26,6 @@ class CreateOffersTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
-
-            // Faltaria porner el id de la empresa y el ciclo al que pertenece la oferta
-
         });
     }
 

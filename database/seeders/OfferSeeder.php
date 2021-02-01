@@ -21,6 +21,7 @@ class OfferSeeder extends Seeder
             $o->startDate = $fak->date;
             $o->endDate = $fak->date;
             $o->description = $fak->text($maxNbChars = 200);
+            $o->company_id = $fak->numberBetween(1, 5);
             $o->save();
         }
     }
