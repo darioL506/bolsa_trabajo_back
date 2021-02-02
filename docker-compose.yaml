@@ -24,7 +24,7 @@ services:
     # volumes:
     #   - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
-      - bolsa_trabajo_front_net-prueba
+      - net_prueba
         phpmyadmin:
     build: phpmyadmin
     container_name: phpmyadmin
