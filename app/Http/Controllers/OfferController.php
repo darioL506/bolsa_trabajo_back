@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 class OfferController extends Controller
 {
 
-    public function offer(Request $request)
-    {
-        return response()->json($request->offer());
-    }
-
     // Método que devuelve todas las ofertas
     public function index() {
          return Offer::all();
