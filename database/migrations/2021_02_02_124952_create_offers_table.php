@@ -8,7 +8,7 @@ class CreateOffersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla que crea las ofertas de empleo de las empresas
      * @return void
      */
     public function up()

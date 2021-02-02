@@ -8,7 +8,7 @@ class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla cre crea los 19 modulos que actualmente tiene el centro
      * @return void
      */
     public function up()

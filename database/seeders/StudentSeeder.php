@@ -18,15 +18,15 @@ class StudentSeeder extends Seeder
             '45116807F','97598233X','55524145Y','01966659K','69841291C','17400270B'];
         $studies = ['Informatica','Comercio'];
         $fak = \Faker\Factory::create('es_ES');
-        for($i=1;$i<=10;$i++){
+        // Se crean 10 estudiantes con la id 2-11
+        for($i=2;$i<=11;$i++){
             $st = new Student();
             $st->name = $fak->firstName;
             $st->lastnames = $fak->lastName;
-            $st->dni = $dni[$i];
-            $st->user_id = $fak->unique()->numberBetween(1,10);
+            $st->dni = $dni[$i-1];
+            $st->user_id = $i;
             $st->birthdate = $fak->date('Y-m-d');
             $st->phone = $fak->numberBetween(100000000,999999999);
-            $st->area = $studies[$fak->numberBetween(0,1)];
             $st->aptitudes = $fak->paragraph(3);
             $st->save();
         }

@@ -8,7 +8,7 @@ class CreateStudentAreasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla para relacionar a los estudiantes con sus areas de estudio mediante user_id y area_id
      * @return void
      */
     public function up()

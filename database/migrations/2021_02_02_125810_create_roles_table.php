@@ -8,14 +8,14 @@ class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla para crear los roles de la aplicacion
      * @return void
      */
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('desciption', 50);
+            $table->string('description', 50);
             $table->timestamps();
         });
     }

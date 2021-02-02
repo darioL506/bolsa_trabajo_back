@@ -8,15 +8,15 @@ class CreateOfferAreasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla que relaciona las ofertas con las areas de estudio mediante company_id y area_id
      * @return void
      */
     public function up()
     {
         Schema::create('offer_areas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')
-                    ->constrained('companies')
+            $table->foreignId('offer_id')
+                    ->constrained('offers')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->foreignId('area_id')

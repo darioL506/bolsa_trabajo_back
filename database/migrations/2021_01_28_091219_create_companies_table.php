@@ -8,7 +8,7 @@ class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla que crea el perfil de empresas, relacionando el user_id
      * @return void
      */
     public function up()
@@ -17,9 +17,14 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('cif',9)->unique();
             $table->string('name',250);
+            $table->foreignId('user_id')
+                    ->constrained('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->string('section',250);
             $table->string('description',500);
-            $table->date('fundacion');
+            $table->date('foundation');
+            $table->boolean('isActive')->default(0);
             $table->timestamps();
 
         });

@@ -8,7 +8,7 @@ class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla que crea el perfil de estudiantes, relacionando el user_id
      * @return void
      */
     public function up()
@@ -18,10 +18,14 @@ class CreateStudentsTable extends Migration
             $table->string('name',250);
             $table->string('lastnames',250);
             $table->string('dni',9)->unique();
-            $table->integer('user_id')->unique();
+            $table->foreignId('user_id')
+                    ->constrained('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->date('birthdate');
             $table->integer('phone');
-            $table->string('area',250);
+            $table->string('aptitudes',500);
+            $table->boolean('isActive')->default(0);
             $table->timestamps();
         });
     }

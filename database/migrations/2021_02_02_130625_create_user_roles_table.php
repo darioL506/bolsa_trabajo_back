@@ -8,7 +8,7 @@ class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla para relacionar los usuarios con su rol mediante user_id y rol_id
      * @return void
      */
     public function up()
