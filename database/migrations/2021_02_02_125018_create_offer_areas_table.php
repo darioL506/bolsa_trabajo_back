@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOffersTable extends Migration
+class CreateOfferAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('offer_areas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('vacant');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->string('description', 200);
-            $table->boolean('isActive')->default(0);
             $table->foreignId('company_id')
-                    ->constrained('users')
+                    ->constrained('companies')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->foreignId('area_id')
+                    ->constrained('areas')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
@@ -36,6 +34,7 @@ class CreateOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('offer_areas');
     }
+
 }

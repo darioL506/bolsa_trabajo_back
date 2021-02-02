@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Area;
 
 class AreaSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class AreaSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['GS Enseñanza y Animación Socio Deportiva', 
+        $areas = ['GS Enseñanza y Animación Socio Deportiva', 
         'GS Acondicionamiento Físico', 
         'GM Gestión Administrativa', 
         'GS Administración y Finanzas', 
@@ -34,8 +35,8 @@ class AreaSeeder extends Seeder
         'GM Instalaciones de Producción de Calor'
         ];
 
-        foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+        foreach ($areas as $area) {
+            Area::create(['description' => $area]);
         }
     }
 }

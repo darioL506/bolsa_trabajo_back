@@ -18,10 +18,10 @@ class CreateStudentsTable extends Migration
             $table->string('name',250);
             $table->string('lastnames',250);
             $table->string('dni',9)->unique();
+            $table->integer('user_id')->unique();
             $table->date('birthdate');
             $table->integer('phone');
             $table->string('area',250);
-            $table->string('aptitudes',500);
             $table->timestamps();
         });
     }

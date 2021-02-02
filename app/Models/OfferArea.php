@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class offerArea extends Model
+class OfferArea extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'offer_id',
+        'area_id',
+    ];
 }
