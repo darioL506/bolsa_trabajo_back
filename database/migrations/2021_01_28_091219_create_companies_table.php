@@ -37,6 +37,8 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('companies', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
     }
 }

@@ -16,7 +16,7 @@ class OfferAreasSeeder extends Seeder
     public function run()
     {
     // Asignamos un ciclo a cada oferta
-    $fak = \Faker\Factory::create('es_ES');
+    $fak = Factory::create('es_ES');
     for($i=1;$i<=10;$i++){
         $o = new OfferArea;
         $o->offer_id = $i;

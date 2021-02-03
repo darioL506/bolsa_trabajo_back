@@ -34,7 +34,9 @@ class CreateOfferAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_areas');
+        Schema::dropIfExists('offer_areas', function (Blueprint $table) {
+            $table->dropForeign(['offer_id', 'area_id']);
+        });
     }
 
 }

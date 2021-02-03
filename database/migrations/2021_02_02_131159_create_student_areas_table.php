@@ -34,6 +34,8 @@ class CreateStudentAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_areas');
+        Schema::dropIfExists('student_areas', function (Blueprint $table) {
+            $table->dropForeign(['user_id', 'areas']);
+        });
     }
 }

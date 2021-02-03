@@ -36,6 +36,8 @@ class CreateOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('offers', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+        });
     }
 }
