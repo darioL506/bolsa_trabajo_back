@@ -4,28 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentsTable extends Migration
+class CreateStudentAreasTable extends Migration
 {
     /**
      * Run the migrations.
-     * Tabla que crea el perfil de estudiantes, relacionando el user_id
+     * Tabla para relacionar a los estudiantes con sus areas de estudio mediante user_id y area_id
      * @return void
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('student_areas', function (Blueprint $table) {
             $table->id();
-            $table->string('name',250);
-            $table->string('lastnames',250);
-            $table->string('dni',9)->unique();
             $table->foreignId('user_id')
                     ->constrained('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
-            $table->date('birthdate');
-            $table->integer('phone');
-            $table->string('aptitudes',500);
-            $table->boolean('isActive')->default(0);
+            $table->foreignId('area_id')
+                    ->constrained('areas')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -37,8 +34,8 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
+        Schema::dropIfExists('student_areas', function (Blueprint $table) {
+            $table->dropForeign(['user_id', 'areas']);
         });
     }
 }

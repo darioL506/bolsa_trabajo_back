@@ -5,18 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Offer extends Model
+class Area extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'vacant',
-        'startDate',
-        'endDate',
         'description',
-        'isActive',
-        'companyId',
     ];
 
 }

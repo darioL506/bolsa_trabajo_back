@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class Student extends Model
+class Company extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'companies';
+
     protected $fillable = [
-        'name',
-        'lastnames',
-        'dni',
         'user_id',
-        'birthdate',
-        'phone',
-        'area',
+        'cif',
+        'name',
+        'section',
+        'description',
+        'foundation'
     ];
 }

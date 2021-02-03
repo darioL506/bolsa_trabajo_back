@@ -8,7 +8,7 @@ class CreateOffersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Tabla que crea las ofertas de empleo de las empresas
      * @return void
      */
     public function up()
@@ -22,7 +22,7 @@ class CreateOffersTable extends Migration
             $table->string('description', 200);
             $table->boolean('isActive')->default(0);
             $table->foreignId('company_id')
-                    ->constrained('users')
+                    ->constrained('companies')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
@@ -36,6 +36,8 @@ class CreateOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('offers', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+        });
     }
 }

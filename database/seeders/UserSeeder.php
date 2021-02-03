@@ -14,7 +14,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         $fak = \Faker\Factory::create('es_ES');
-        for($i=1;$i<=10;$i++){
+        // Usuario que luego sera superadmin
+        $u = new \App\Models\User;
+        $u->email = 'admin@admin.com';
+        $u->password = \Hash::make('!aA123456');
+        $u->save();
+        // Se crean 15 usuarios
+        for($i=1;$i<=15;$i++){
             $u = new \App\Models\User;
             $u->email = $fak->email;
             $u->password = \Hash::make($fak->password);
