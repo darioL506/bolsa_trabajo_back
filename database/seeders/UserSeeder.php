@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         for($i=1;$i<=15;$i++){
             $u = new \App\Models\User;
             $u->email = $fak->email;
-            $u->password = \Hash::make($fak->password);
+            $u->password = \Hash::make('!aA123456');
             $u->save();
         }
     }
