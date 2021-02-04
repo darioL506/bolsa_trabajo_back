@@ -8,8 +8,7 @@ RUN apt-get update \
     && docker-php-ext-install mysqli pdo pdo_mysql \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-COPY ./init.sh /tmp
+COPY ./init.sh /tmp    
 ENTRYPOINT ["/tmp/init.sh"]
 
-#CMD php artisan serve --host=0.0.0.0 --port=8000
-EXPOSE 8000
+#CMD php artisan serve --host=0.0.0.0 --port=$APP_PORT

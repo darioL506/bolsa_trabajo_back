@@ -1,5 +1,4 @@
 #!/bin/sh
-
 cd /app
 php artisan migrate --seed
 php artisan passport:install --force
