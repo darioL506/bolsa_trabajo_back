@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Offer;
-use App\Models\OfferArea;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\OfferAreaController;
 
 class OfferController extends Controller
 {
@@ -16,7 +17,7 @@ class OfferController extends Controller
     // Método que devuelve todas las ofertas y el area a la que pertenecen
     public function index() {
          // return Offer::all()->offerArea;
-         //return OfferArea::with(['offerArea'])->get();
+         // return OfferArea::with(['offerArea'])->get();
          $offer= \DB::table('offers')
                 ->join('offer_areas', 'offer_areas.offer_id', '=', 'offers.id')
                 ->join('areas', 'areas.id', '=', 'offer_areas.area_id')
@@ -43,8 +44,41 @@ class OfferController extends Controller
 
     // Método para guardar una nueva oferta
     public function store(Request $request) {
-        $offer = Offer::create($request->all());
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $offer], 201);
+        // $offer = Offer::create($request->all());
+
+        // Otra forma de hacerlo
+        $name = $request->get('name');
+        $vacant = $request->get('vacant');
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $description = $request->get('description');
+        $company_id = $request->get('company_id');
+
+        $o = new \App\Models\Offer;
+        $o->name = $name;
+        $o->vacant = $vacant;
+        $o->startDate = $startDate;
+        $o->endDate = $endDate;
+        $o->description = $description;
+        $o->company_id = $company_id;
+        try {
+            $o->save();
+        } catch (\Exception $e) {
+            $mensaje = 'Error al insertar la oferta';
+        }
+
+         // Recupero el nombre del area para sacar el id del area
+        $areaDescription = $request->get('areaDescription');
+        $area_id = AreaController::getAreaId($areaDescription);
+
+        // Recupero el id de la última oferta de la empresa
+        $offer_id = Offer::max('id');
+
+        // Inserto en la tabla offer area
+        OfferAreaController::store($offer_id, $area_id);
+
+        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $o], 201);
+
     }
 
     // Método para actualizar una oferta
@@ -76,6 +110,10 @@ class OfferController extends Controller
         $offer->delete();
 
         return response()->json(['code' => 200, 'message' => 'Artículo ' . $offer . ' borrado.'], 200);
+    }
+
+    public static function getLastId($company_id){
+
     }
 
 }

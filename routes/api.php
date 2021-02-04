@@ -7,6 +7,7 @@ use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\AreaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
     // Rutas para compañias
     Route::get('companyId/{user_id}', [CompanyController::class, 'getCompanyId']); // Devuelve una compañia
+    // Rutas para Areas
+    Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
 });
 
 Route::post('student/insert',[StudentController::class,'insertStudents']);
