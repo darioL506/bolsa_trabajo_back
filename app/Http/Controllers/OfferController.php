@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Offer;
-
+use App\Models\OfferArea;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -13,9 +13,18 @@ class OfferController extends Controller
         return response()->json($request->offer());
     }
 
-    // Método que devuelve todas las ofertas
+    // Método que devuelve todas las ofertas y el area a la que pertenecen
     public function index() {
-         return Offer::all();
+         // return Offer::all()->offerArea;
+         //return OfferArea::with(['offerArea'])->get();
+         $offer= \DB::table('offers')
+                ->join('offer_areas', 'offer_areas.offer_id', '=', 'offers.id')
+                ->join('areas', 'areas.id', '=', 'offer_areas.area_id')
+                ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
+                            'offer_areas.area_id', 'areas.description as area_description')
+                ->get();
+
+        return $offer;
     }
 
     // Método para mostar una oferta

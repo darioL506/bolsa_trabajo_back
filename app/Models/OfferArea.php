@@ -11,4 +11,9 @@ class OfferArea extends Model
         'offer_id',
         'area_id',
     ];
+
+    public function offerArea(){
+        return $this->belongsTo(Company::class);
+    }
+
 }

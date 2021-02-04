@@ -30,6 +30,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'auth:api'], function() {
     // Rutas para ofertas
     Route::get('offers', [OfferController::class, 'index']); // Devuelve todas las ofertas
+    Route::get('offersbyid/{id}', [OfferController::class, 'index']); // Devuelve todas las ofertas de una compañia en concreto
     Route::get('offers/{offer}', [ArticleController::class, 'show']); // Devuelve una oferta
     Route::post('offers', [OfferController::class, 'store']); // Guarda una nueva oferta
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
