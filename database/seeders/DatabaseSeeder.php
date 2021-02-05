@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CompaniesSeeder::class);
         $this->call(OfferSeeder::class);
         $this->call(RolSeeder::class);
-        $this->call(OfferAreasSeeder::class);
         $this->call(UserRolesSeeder::class);
         $this->call(InterviewSeeder::class);
     }

@@ -25,6 +25,10 @@ class CreateOffersTable extends Migration
                     ->constrained('companies')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->foreignId('area_id')
+                    ->constrained('areas')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

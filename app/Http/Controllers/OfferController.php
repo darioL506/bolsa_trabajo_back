@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Offer;
-
 use Illuminate\Http\Request;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\OfferAreaController;
 
 class OfferController extends Controller
 {
@@ -13,10 +14,30 @@ class OfferController extends Controller
         return response()->json($request->offer());
     }
 
-    // Método que devuelve todas las ofertas
+    // Método que devuelve todas las ofertas y el area a la que pertenecen
     public function index() {
-         return Offer::all();
+         // return Offer::all()->offerArea;
+         $offer= \DB::table('offers')
+                ->join('areas', 'offers.area_id', '=', 'areas.id')
+                ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
+                            'offers.area_id', 'areas.description as area_description')
+                ->get();
+
+        return $offer;
     }
+
+    // Método que devuelve todas las ofertas y el area a la que pertenecen
+    public function indexById($id) {
+        // return Offer::all()->offerArea;
+        $offer= \DB::table('offers')
+               ->join('areas', 'offers.area_id', '=', 'areas.id')
+               ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
+                           'offers.area_id', 'areas.description as area_description')
+                ->where('areas.id', '=', $id)
+               ->get();
+   
+           return $offer;
+       }
 
     // Método para mostar una oferta
     public function show($oferta) {
@@ -34,8 +55,38 @@ class OfferController extends Controller
 
     // Método para guardar una nueva oferta
     public function store(Request $request) {
-        $offer = Offer::create($request->all());
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $offer], 201);
+        // $offer = Offer::create($request->all());
+
+        // Otra forma de hacerlo
+        $name = $request->get('name');
+        $vacant = $request->get('vacant');
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $description = $request->get('description');
+        $company_id = $request->get('company_id');
+
+        // Recupero el nombre del area para sacar el id del area
+        $areaDescription = $request->get('areaDescription');
+        $area = AreaController::getAreaId($areaDescription);
+        $area_id = $area[0]->id;
+
+        $o = new \App\Models\Offer;
+        $o->name = $name;
+        $o->vacant = $vacant;
+        $o->startDate = $startDate;
+        $o->endDate = $endDate;
+        $o->description = $description;
+        $o->company_id = $company_id;
+        $o->area_id = $area_id;
+        $message = 'Inserción ok';
+        try {
+            $o->save();
+        } catch (\Exception $e) {
+            $message= 'Error al insertar la oferta';
+        }
+
+        return response()->json(['code' => 201, 'message' => $message . $o], 201);
+
     }
 
     // Método para actualizar una oferta
@@ -48,7 +99,25 @@ class OfferController extends Controller
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra una oferta con ese código.'])], 404);
         }
 
-        $offer->update($request->all());
+        // $offer->update($request->all());
+
+        // Otra forma de hacerlo
+        $id= $request->get('id');
+        $name = $request->get('name');
+        $vacant = $request->get('vacant');
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $description = $request->get('description');
+
+        // Recupero el nombre del area para sacar el id del area
+        $areaDescription = $request->get('areaDescription');
+        $area = AreaController::getAreaId($areaDescription);
+        $area_id = $area[0]->id;
+
+        // Se guarda todo en la base de datos de oferta
+        \DB::table('offers')
+            ->where('id', $id)
+            ->update(['name' => $name, 'vacant' => $vacant, 'startDate' => $startDate, 'endDate' => $endDate, 'description' => $description, 'area_id' => $area_id ]);
 
         return response()->json($offer, 200);
     }
