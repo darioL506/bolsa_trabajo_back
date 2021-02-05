@@ -20,7 +20,7 @@ class OfferController extends Controller
          $offer= \DB::table('offers')
                 ->join('areas', 'offers.area_id', '=', 'areas.id')
                 ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
-                            'offers.area_id', 'areas.description as area_description')
+                            'offers.area_id', 'offers.isActive', 'areas.description as area_description')
                 ->get();
 
         return $offer;
@@ -32,12 +32,12 @@ class OfferController extends Controller
         $offer= \DB::table('offers')
                ->join('areas', 'offers.area_id', '=', 'areas.id')
                ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
-                           'offers.area_id', 'areas.description as area_description')
+                           'offers.area_id', 'offers.isActive', 'areas.description as area_description')
                 ->where('areas.id', '=', $id)
                ->get();
    
            return $offer;
-       }
+    }
 
     // Método para mostar una oferta
     public function show($oferta) {
@@ -136,6 +136,34 @@ class OfferController extends Controller
         $offer->delete();
 
         return response()->json(['code' => 200, 'message' => 'Artículo ' . $offer . ' borrado.'], 200);
+    }
+
+    // Método para activa una oferta
+    public function activeOffer($id) {
+        // Comprobamos si la oferta existe.
+        $offer = Offer::find($id);
+        // Si no existe esa oferta devolvemos un error.
+        if (!$offer) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra una oferta con ese código.'])], 404);
+        }
+        // Actualizo
+        Offer::where('id', '=', $id)
+            ->update(['isActive' => 1]);
+        return response()->json($offer, 200);
+    }
+
+    // Método para activa una oferta
+    public function desactiveOffer($id) {
+        // Comprobamos si la oferta existe.
+        $offer = Offer::find($id);
+        // Si no existe esa oferta devolvemos un error.
+        if (!$offer) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra una oferta con ese código.'])], 404);
+        }
+        // Actualizo
+        Offer::where('id', '=', $id)
+            ->update(['isActive' => 0]);
+        return response()->json($offer, 200);
     }
 
 }
