@@ -14,7 +14,9 @@ class AreaController extends Controller
 
    // Método para coger el id de un area por su descripcion
    public static function getAreaId($areaDescription){
-       return Area::where('description', $areaDescription)->first(['id']);
+
+    return $id = Area::select('id')->where('description', $areaDescription)->get();
+    
    }
 
 }
