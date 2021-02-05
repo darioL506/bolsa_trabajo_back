@@ -1,4 +1,4 @@
-FROM php:7.4.14-fpm as laravel
+FROM php:7.4.14-fpm
 
 WORKDIR "/app"
 

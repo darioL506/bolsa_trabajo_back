@@ -15,6 +15,7 @@ El entorno en desarrollo esta desplegado en Docker , el primer paso seria añadi
 
 127.0.0.1 bolsaTrabajo.com
 127.0.0.1 phpmyadmin.com
+127.0.0.1 bolsapi.com
 
 Tras esto procedemos a realizar un : 
 

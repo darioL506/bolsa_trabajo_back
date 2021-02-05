@@ -1,15 +1,16 @@
 version: "3.8"
 services:
-  php-fpm:
+  phpfpm:
     build: ./
-    container_name: php-fpm
+    container_name: phpfpm
     working_dir: /app
     volumes:
       - ./:/app
     networks:
       - net_prueba
     ports:
-      - "3021:8000"
+      - 3021:8000
+
 
   phpmyadmin:
     build: ./phpmyadmin
@@ -37,4 +38,5 @@ services:
       - net_prueba
 networks:
   net_prueba:
+      name: net_prueba
       external: true

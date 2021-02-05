@@ -1,4 +1,6 @@
 #!/bin/sh
+composer update
+php artisan key:generate
 
 php artisan migrate --seed
 php artisan passport:install --force
