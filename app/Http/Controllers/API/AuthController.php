@@ -8,6 +8,7 @@ use App\Models\UserRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
+use App\Http\Controllers\AreaController;
 
 
 class AuthController extends Controller
@@ -49,6 +50,6 @@ class AuthController extends Controller
         $us = auth()->user();
         $rol = UserRolesController::getRol($us->id);
 
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id ], 'code' => 200], 200);
+        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
     }
 }
