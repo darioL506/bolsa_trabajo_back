@@ -1,3 +1,38 @@
+# Bolsa de trabajo  CIFP Virgen de Gracia
+
+Se trata de una bolsa de trabajo , exclusiva del centro CIFP Virgen de Gracia , donde sus actuales y antiguos alumnos podran aparecer listados en su plataforma siendo visibles para empresas interesadas en la metodologia y conocimientos que se llevan a cabo en el centro buscando asi alguien graduado en dicho centro.
+
+
+
+### Pre-requisitos 📋
+
+Docker y docker compose .
+
+
+## Despliegue 📦
+
+El entorno en desarrollo esta desplegado en Docker , el primer paso seria añadir a tu archivo host las siguientes lineas:
+
+127.0.0.1 bolsaTrabajo.com
+127.0.0.1 phpmyadmin.com
+127.0.0.1 bolsapi.com
+
+Tras esto procedemos a realizar un : 
+
+1º Realizamos *docker-compose up -d*  en el directorio de front por medio de consola.
+2º Realizamos *docker-compose up -d*  en el directorio de back por medio de consola.
+3º En el navegador ahora estan disponibles las siguientes direcciones bolsaTrabajo.com y phpmyadmin.com .
+
+Contraseña por defecto :  !aA123456  para todos los usuarios.
+
+## Autores ✒️
+
+* **Luis Quesada** - [kherop](https://github.com/kherop)
+* **Dario Leon** - [darioL506](https://github.com/darioL506)
+* **Israel Molina** - [isra9shadow](https://github.com/TP01AB)  
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

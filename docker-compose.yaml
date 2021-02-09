@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  phpfpm:
+    build: ./
+    container_name: phpfpm
+    working_dir: /app
+    volumes:
+      - ./:/app
+    networks:
+      - net_prueba
+    ports:
+      - 3021:8000
+
+
+  phpmyadmin:
+    build: ./phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - VIRTUAL_HOST=phpmyadmin.com
+    networks:
+      - net_prueba
+
+  db:
+    image: mariadb:10.5.8
+    container_name: database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: job_bank
+      MYSQL_ROOT_PASSWORD: Chubaca2020
+      MYSQL_PASSWORD: Chubaca2020
+      MYSQL_USER: admin
+    # volumes:
+    #   - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - net_prueba
+networks:
+  net_prueba:
+      name: net_prueba
+      external: true

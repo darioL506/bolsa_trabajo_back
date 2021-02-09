@@ -1,6 +1,10 @@
 #!/bin/sh
 echo "------copiando .env------"
 cp .env.example .env
+echo "------ejecutando composer------"
+composer update
+echo "-----FIN -----"
+
 echo "------Generando clave------"
 php artisan key:generate
 echo "------Generando BD y contenido------"
