@@ -10,20 +10,15 @@
 <p align="center"> CIFP Virgen de Gracia</p>
 <a href="https://cifpvirgendegracia.com/"><p align="center"><img src="https://cifpvirgendegracia.com/wp-content/uploads/2019/11/LogoIcon.png"/></p> </a>
 
-# Descripcion
+# Descripción
 
-Se trata de una web para dar visibiliad laboral a los actuales y antiguos estudiantes , para facilitar la insercion laboral en empresas de confianza del centro CIFP Virgen de Gracia.
+Se trata de una web para dar visibilidad laboral a los actuales y antiguos estudiantes , para facilitar la inserción laboral en empresas de confianza del centro CIFP Virgen de Gracia.
 
-## Tabla de contenido
+# Comenzando 🚀
 
-- [Comienzo](#Comenzando).
-- [Pre-requisitos](#Pre-requisitos).
-- [Instalacion](#Instalacion).
-- [Despliegue](#Despliegue).
-- [Manuales](#Manuales).
-- [Autores](#Autores).
+Gitkracken Board del proyecto:
 
-## Comenzando 🚀
+-[Board tareas](https://app.gitkraken.com/glo/board/YAlRuBdxdwARdzNd)
 
 El proyecto consta de dos repositorios :
 
@@ -32,7 +27,7 @@ El proyecto consta de dos repositorios :
 
 Mira **Despliegue** para conocer como desplegar el proyecto.
 
-### Pre-requisitos 📋
+# Pre-requisitos 📋
 
 _Los requisitos en este proyecto son tener instalados las siguientes herramientas:_
 
@@ -43,12 +38,12 @@ _Los requisitos en este proyecto son tener instalados las siguientes herramienta
 * 🍀 [Script de pre-requisitos](https://drive.google.com/file/d/1zok1aGt1BMXPIWRKoAxVPNc23r-xm8L3/view?usp=sharing)
 <<ejecutar anteriormente un sudo su>>
 #### Windows 10 ####
-#### Requiere la version 20h2  ####
+#### Requiere la versión 20h2  ####
 * :whale: [Docker-desktop](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
-* :whale2: [Tutorial instalacion Docker](https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/)
+* :whale2: [Tutorial instalación Docker](https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/)
 * 📥[Git](http://git-scm.com/download/win)
 
-### Instalación 🔧
+# Instalación 🔧
 
 _Para obtener un entorno de desarrollo dependiendo de nuestro sistema operativo de trabajo tenemos los siguientes Scripts :_
 
@@ -57,19 +52,19 @@ _Para obtener un entorno de desarrollo dependiendo de nuestro sistema operativo 
 #### Windows 10 ####
 *[Script Windows](https://drive.google.com/file/d/1l-LMBZNxvrN3WRVxz6gx7LM1RArV7qNm/view?usp=sharing)
 
-Estos scripts crearan una carpeta Proyectos que contiene los dos repositorios, para conocer como desplegar el entorno de desarrollo o produccion dirijase al siguiente apartado.
-## Despliegue 📦
+Estos scripts crearan una carpeta Proyectos que contiene los dos repositorios, para conocer como desplegar el entorno de desarrollo o producción diríjase al siguiente apartado.
+# Despliegue 📦
 
 *Entorno Desarrollo:
     [Script]()
 
-## Manuales 📖
+# Manuales 📖
 
 Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Manual]() ** EN CONSTRUCCION 🛠 **
 
-## Autores ✒️
+# Autores ✒️
 
 * **Luis Quesada** - *Front & Back hasta v1.0* - [Luis Quesada Romero](https://github.com/kherop) 
-* **Dario Leon** - *Full Stack desde v1.0 * - [Dario Leon Gonzalez](https://github.com/darioL506) 
+* **Darío León** - *Full Stack desde v1.0 * - [Darío León Gonzalez](https://github.com/darioL506) 
 * **Israel Molina** - *Full Stack desde v1.0 * - [Israel Molina Pulpon](https://github.com/TP01AB) 
 ---
