@@ -1,63 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Generic badge](https://img.shields.io/badge/Front-Angular-blue.svg)](https://shields.io/) 
+[![Generic badge](https://img.shields.io/badge/Api-Laravel-red.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Development%20enviroment-Docker-1f425f.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Deploy%20front-Netlify-04bac7.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Ubuntu-Ready-7a04cf.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Windows-Ready-f57905.svg)](https://shields.io/)
 
-## About Laravel
+<h1 align="center"> Bolsa de trabajo </h1>
+<p align="center"> CIFP Virgen de Gracia</p>
+<a href="https://cifpvirgendegracia.com/"><p align="center"><img src="https://cifpvirgendegracia.com/wp-content/uploads/2019/11/LogoIcon.png"/></p> </a>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Descripcion
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Se trata de una web para dar visibiliad laboral a los actuales y antiguos estudiantes , para facilitar la insercion laboral en empresas de confianza del centro CIFP Virgen de Gracia.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tabla de contenido
 
-## Learning Laravel
+- [Comienzo](#Comenzando).
+- [Pre-requisitos](#Pre-requisitos).
+- [Instalacion](#Instalacion).
+- [Despliegue](#Despliegue).
+- [Manuales](#Manuales).
+- [Autores](#Autores).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Comenzando 🚀
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+El proyecto consta de dos repositorios :
 
-## Laravel Sponsors
+* [Repositorio Back](https://github.com/kherop/bolsa_trabajo_back.git) <br>
+* [Repositorio Front](https://github.com/kherop/bolsa_trabajo_front.git)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Mira **Despliegue** para conocer como desplegar el proyecto.
 
-### Premium Partners
+### Pre-requisitos 📋
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+_Los requisitos en este proyecto son tener instalados las siguientes herramientas:_
 
-## Contributing
+#### Ubuntu :penguin: ####
+* :whale:[Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es)
+* :whale2: [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-es)
+* 📥[Git](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-20-04-es)
+* 🍀 [Script de pre-requisitos](https://drive.google.com/file/d/1zok1aGt1BMXPIWRKoAxVPNc23r-xm8L3/view?usp=sharing)
+<<ejecutar anteriormente un sudo su>>
+#### Windows 10 ####
+#### Requiere la version 20h2  ####
+* :whale: [Docker-desktop](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+* :whale2: [Tutorial instalacion Docker](https://enmilocalfunciona.io/instalando-y-probando-docker-en-windows-10/)
+* 📥[Git](http://git-scm.com/download/win)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Instalación 🔧
 
-## Code of Conduct
+_Para obtener un entorno de desarrollo dependiendo de nuestro sistema operativo de trabajo tenemos los siguientes Scripts :_
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Ubuntu :penguin: ####
+*[Script ubuntu](https://drive.google.com/file/d/1hqxRU9xdjcdVNWD8YPVzTyIQtQZkBbkl/view?usp=sharing)
+#### Windows 10 ####
+*[Script Windows](https://drive.google.com/file/d/1l-LMBZNxvrN3WRVxz6gx7LM1RArV7qNm/view?usp=sharing)
 
-## Security Vulnerabilities
+Estos scripts crearan una carpeta Proyectos que contiene los dos repositorios, para conocer como desplegar el entorno de desarrollo o produccion dirijase al siguiente apartado.
+## Despliegue 📦
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+*Entorno Desarrollo:
+    [Script]()
 
-## License
+## Manuales 📖
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# bolsa_trabajo_back
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Manual]() ** EN CONSTRUCCION 🛠 **
+
+## Autores ✒️
+
+* **Luis Quesada** - *Front & Back hasta v1.0* - [Luis Quesada Romero](https://github.com/kherop) 
+* **Dario Leon** - *Full Stack desde v1.0 * - [Dario Leon Gonzalez](https://github.com/darioL506) 
+* **Israel Molina** - *Full Stack desde v1.0 * - [Israel Molina Pulpon](https://github.com/TP01AB) 
+---
