@@ -1,4 +1,5 @@
 
+
 [![Generic badge](https://img.shields.io/badge/Front-Angular-blue.svg)](https://shields.io/) 
 [![Generic badge](https://img.shields.io/badge/Api-Laravel-red.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Development%20enviroment-Docker-1f425f.svg)](https://shields.io/)
@@ -48,18 +49,19 @@ Estos scripts crearan una carpeta Proyectos que contiene los dos repositorios, p
 ## Despliegue 📦
 
 El despliegue variara dependiendo de nuestro sistema operativo .
-  -Desarrollo 
-      *Ubuntu:
-          1º Descargar el [Script](https://drive.google.com/file/d/1pPxc-gNklaX5URKry5OQj4j3fnElPPTZ/view?usp=sharing) y colocarlo en la carpeta Proyectos.
-          2º Ejecutar el Script.
-      **SCRIPT para montar todo el entorno en un 1 paso--> [AQUI](https://drive.google.com/file/d/1UBv8UT2xEeVqN2JBM1uTuqQ2CSahsj4I/view?usp=sharing), colocar en la carpeta donde quieres desplegar el proyecto.
-      *Windows:
-          1º Abrir la ruta C:/Windows/System32/drivers/etc y modificar el archivo hosts para añadir las siguientes lineas:
-              "127.0.0.1 bolsatrabajo.com"  añadir sin comillas
-              "127.0.0.1 phpmyadmin.com" añadir sin comillas
-          2º Descargar el [Script](https://drive.google.com/file/d/1E2pKfvBHnpwTJ1Iy_Cm_5NEF7hNolgMb/view?usp=sharing) y colocarlo en la carpeta Proyectos.
-          3º Abrir Docker-desktop.
-          4º Ejecutar el Script.
+  -Desarrollo <br>
+      -Ubuntu:<br>
+          -1º Descargar el [Script](https://drive.google.com/file/d/1pPxc-gNklaX5URKry5OQj4j3fnElPPTZ/view?usp=sharing) y colocarlo en la carpeta Proyectos. <br>
+          -2º Ejecutar el Script.<br>
+      **SCRIPT para montar todo el entorno en un 1 paso--> [AQUI](https://drive.google.com/file/d/1UBv8UT2xEeVqN2JBM1uTuqQ2CSahsj4I/view?usp=sharing), colocar en la carpeta  donde quieres desplegar el proyecto.<br>
+      <br>
+      -Windows:<br>
+          ** 1º Abrir la ruta C:/Windows/System32/drivers/etc y modificar el archivo hosts para añadir las siguientes lineas:<br>
+              *** "127.0.0.1 bolsatrabajo.com"  añadir sin comillas <br>
+              *** "127.0.0.1 phpmyadmin.com" añadir sin comillas <br>
+          ** 2º Descargar el [Script](https://drive.google.com/file/d/1E2pKfvBHnpwTJ1Iy_Cm_5NEF7hNolgMb/view?usp=sharing) y colocarlo en la carpeta Proyectos. <br>
+          ** 3º Abrir Docker-desktop. <br>
+          ** 4º Ejecutar el Script. <br>
           
   Con estos pasos tendremos desplegado un entorno de desarrollo donde podremos observar la web bolsatrabajo.com  y  ver la BBDD a traves del phpmyadmin.com.     
    
