@@ -18,6 +18,6 @@ class Student extends Model
         'user_id',
         'birthdate',
         'phone',
-        'area',
+        'aptitudes',
     ];
 }
