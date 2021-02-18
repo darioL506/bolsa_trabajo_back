@@ -9,7 +9,7 @@ class UserRolesController extends Controller
 {
     // Método para saber los roles de un usario
     public static function getRol($user_id) {
-        return $roles = UserRol::where('id',$user_id)->first();
+        return $roles = UserRol::where('user_id',$user_id)->first();
     }
     
 }
