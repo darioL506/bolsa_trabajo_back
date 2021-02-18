@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StudentArea;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -11,16 +12,22 @@ use PHPUnit\Util\Json;
 class StudentController extends Controller
 {
     public function insertStudents(Request $request) {
-        
+
+
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
+        $st->user_id = $request->get('id');
         $st->birthdate = implode("-",$request->get('birthdate'));
         $st->phone = $request->get('phone');
-        $st->area = $request->get('area');
         $st->aptitudes = $request->get('aptitudes');
         $st->save();
+
+        $stAr = new StudentArea();
+        $stAr->user_id = $request->get('id');
+        $stAr->area_id = $request->get('area');
+        $stAr->save();
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st ], 201);
 

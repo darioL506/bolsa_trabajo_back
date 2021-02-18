@@ -31,6 +31,23 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
+        $userRol = new UserRol();
+
+        $rol = 0;
+        if($request->get('condicion') =='superadmin') {
+            $rol = 1;
+        } elseif($request->get('condicion') =='admin') {
+            $rol = 2;
+        } elseif($request->get('condicion') =='student') {
+            $rol = 3;
+        } elseif ($request->get('condicion') == 'company') {
+            $rol = 4;
+        }
+
+        $userRol->user_id = $user->id;
+        $userRol->rol_id = $rol;
+        $userRol->save();
+
         return response()->json(['message' => ['user' => $user, 'access_token' => $accessToken], 'code' => 201], 201);
     }
 
