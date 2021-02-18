@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   phpfpm:
-    build: ./
+    image: isra9shadow/bolsatrabajoback:v0.2.5
     container_name: phpfpm
     working_dir: /app
     volumes:
@@ -9,8 +9,7 @@ services:
     networks:
       - net_prueba
     ports:
-      - 3021:8000
-
+      - 8082:8000
 
   phpmyadmin:
     build: ./phpmyadmin
@@ -38,5 +37,5 @@ services:
       - net_prueba
 networks:
   net_prueba:
-      name: net_prueba
-      external: true
+    name: net_prueba
+    external: true
