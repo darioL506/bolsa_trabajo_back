@@ -24,11 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Métodos 
+// Métodos
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function () {
     // Rutas para ofertas
     Route::get('offers', [OfferController::class, 'index']); // Devuelve todas las ofertas
     Route::get('offers/{id}', [OfferController::class, 'indexById']); // Devuelve una oferta
@@ -43,7 +43,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
-
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
@@ -51,7 +50,9 @@ Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las are
 Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
 Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
 
-Route::post('student/insert',[StudentController::class,'insertStudents']);
+Route::post('student/insert', [StudentController::class, 'insertStudents']);
 Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
-Route::get('student/get-all',[StudentController::class, 'getAll']);
-Route::get('student/{user_Id}',[StudentController::class, 'get']);
+Route::get('student/get-all', [StudentController::class, 'getAll']);
+Route::get('student/{user_Id}', [StudentController::class, 'get']);
+
+Route::post('company/insert', [CompanyController::class, 'insertCompany']);

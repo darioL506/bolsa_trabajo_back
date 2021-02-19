@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AreaController;
@@ -15,32 +16,54 @@ class OfferController extends Controller
     }
 
     // Método que devuelve todas las ofertas y el area a la que pertenecen
-    public function index() {
-         // return Offer::all()->offerArea;
-         $offer= \DB::table('offers')
-                ->join('areas', 'offers.area_id', '=', 'areas.id')
-                ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
-                            'offers.area_id', 'offers.isActive', 'areas.description as area_description')
-                ->get();
+    public function index($id)
+    {
+        // return Offer::all()->offerArea;
+        $offer = \DB::table('offers')
+            ->join('areas', 'offers.area_id', '=', 'areas.id')
+            ->select(
+                'offers.id',
+                'offers.vacant',
+                'offers.name',
+                'offers.description',
+                'offers.startDate',
+                'offers.endDate',
+                'offers.area_id',
+                'offers.isActive',
+                'areas.description as area_description'
+            )
+            ->where('offers.company_id', '=', $id)
+            ->get();
 
         return $offer;
     }
 
-    // Método que devuelve todas las ofertas y el area a la que pertenecen
-    public function indexById($id) {
+    // Método que devuelve todas las ofertas y que pertenecen a un area.
+    public function indexById($id)
+    {
         // return Offer::all()->offerArea;
-        $offer= \DB::table('offers')
-               ->join('areas', 'offers.area_id', '=', 'areas.id')
-               ->select('offers.id', 'offers.vacant', 'offers.name', 'offers.description', 'offers.startDate', 'offers.endDate',
-                           'offers.area_id', 'offers.isActive', 'areas.description as area_description')
-                ->where('areas.id', '=', $id)
-               ->get();
-   
-           return $offer;
+        $offer = \DB::table('offers')
+            ->join('areas', 'offers.area_id', '=', 'areas.id')
+            ->select(
+                'offers.id',
+                'offers.vacant',
+                'offers.name',
+                'offers.description',
+                'offers.startDate',
+                'offers.endDate',
+                'offers.area_id',
+                'offers.isActive',
+                'areas.description as area_description'
+            )
+            ->where('areas.id', '=', $id)
+            ->get();
+
+        return $offer;
     }
 
     // Método para mostar una oferta
-    public function show($oferta) {
+    public function show($oferta)
+    {
         // Comprobamos si la oferta existe existe.
         $oferta = Offer::find($oferta);
 
@@ -54,7 +77,8 @@ class OfferController extends Controller
     }
 
     // Método para guardar una nueva oferta
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // $offer = Offer::create($request->all());
 
         // Otra forma de hacerlo
@@ -79,18 +103,18 @@ class OfferController extends Controller
         $o->company_id = $company_id;
         $o->area_id = $area_id;
         $message = 'Inserción ok';
-        try {
-            $o->save();
+        $o->save();
+        /*try {
         } catch (\Exception $e) {
-            $message= 'Error al insertar la oferta';
-        }
+            $message = $e;
+        }*/
 
         return response()->json(['code' => 201, 'message' => $message . $o], 201);
-
     }
 
     // Método para actualizar una oferta
-    public function update(Request $request, $offer) {
+    public function update(Request $request, $offer)
+    {
         // Comprobamos si la oferta existe.
         $offer = Offer::find($offer);
 
@@ -102,7 +126,7 @@ class OfferController extends Controller
         // $offer->update($request->all());
 
         // Otra forma de hacerlo
-        $id= $request->get('id');
+        $id = $request->get('id');
         $name = $request->get('name');
         $vacant = $request->get('vacant');
         $startDate = $request->get('startDate');
@@ -117,13 +141,14 @@ class OfferController extends Controller
         // Se guarda todo en la base de datos de oferta
         \DB::table('offers')
             ->where('id', $id)
-            ->update(['name' => $name, 'vacant' => $vacant, 'startDate' => $startDate, 'endDate' => $endDate, 'description' => $description, 'area_id' => $area_id ]);
+            ->update(['name' => $name, 'vacant' => $vacant, 'startDate' => $startDate, 'endDate' => $endDate, 'description' => $description, 'area_id' => $area_id]);
 
         return response()->json($offer, 200);
     }
 
     // Método para borrar oferta
-    public function delete($offer) {
+    public function delete($offer)
+    {
         // Comprobamos si la oferta existe.
         $offer = Offer::find($offer);
 
@@ -139,7 +164,8 @@ class OfferController extends Controller
     }
 
     // Método para activa una oferta
-    public function activeOffer($id) {
+    public function activeOffer($id)
+    {
         // Comprobamos si la oferta existe.
         $offer = Offer::find($id);
         // Si no existe esa oferta devolvemos un error.
@@ -153,7 +179,8 @@ class OfferController extends Controller
     }
 
     // Método para activa una oferta
-    public function desactiveOffer($id) {
+    public function desactiveOffer($id)
+    {
         // Comprobamos si la oferta existe.
         $offer = Offer::find($id);
         // Si no existe esa oferta devolvemos un error.
@@ -165,5 +192,4 @@ class OfferController extends Controller
             ->update(['isActive' => 0]);
         return response()->json($offer, 200);
     }
-
 }

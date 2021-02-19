@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
 use App\Http\Controllers\AreaController;
-
+use App\Http\Controllers\CompanyController;
 
 class AuthController extends Controller
 {
     //
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 
         if (User::where('email', $request->get('email'))->count() == 1) {
             return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
@@ -34,11 +35,11 @@ class AuthController extends Controller
         $userRol = new UserRol();
 
         $rol = 0;
-        if($request->get('condicion') =='superadmin') {
+        if ($request->get('condicion') == 'superadmin') {
             $rol = 1;
-        } elseif($request->get('condicion') =='admin') {
+        } elseif ($request->get('condicion') == 'admin') {
             $rol = 2;
-        } elseif($request->get('condicion') =='student') {
+        } elseif ($request->get('condicion') == 'student') {
             $rol = 3;
         } elseif ($request->get('condicion') == 'company') {
             $rol = 4;
@@ -51,7 +52,8 @@ class AuthController extends Controller
         return response()->json(['message' => ['user' => $user, 'access_token' => $accessToken], 'code' => 201], 201);
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $loginData = $request->validate([
             'email' => 'email|required',
             'password' => 'required'
@@ -66,7 +68,10 @@ class AuthController extends Controller
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
         $rol = UserRolesController::getRol($us->id);
-
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
+        $company_id = "";
+        if ($rol == 4) {
+            $company_id = CompanyController::getCompanyId($us->id);
+        }
+        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
     }
 }
