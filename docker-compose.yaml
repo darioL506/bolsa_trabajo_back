@@ -9,8 +9,7 @@ services:
     networks:
       - net_prueba
     ports:
-      - 3021:8000
-
+      - 8082:8000
 
   phpmyadmin:
     build: ./phpmyadmin
@@ -38,5 +37,4 @@ services:
       - net_prueba
 networks:
   net_prueba:
-      name: net_prueba
-      external: true
+    name: net_prueba

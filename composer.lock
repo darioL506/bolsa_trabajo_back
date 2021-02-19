@@ -1447,41 +1447,43 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "4.1.1",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "7959c5ee8d50e75b8e39ff9e11041208c22a542a"
+                "reference": "b80c4876a010cd8bfa9c78de64c930bb2fc8fb9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/7959c5ee8d50e75b8e39ff9e11041208c22a542a",
-                "reference": "7959c5ee8d50e75b8e39ff9e11041208c22a542a",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/b80c4876a010cd8bfa9c78de64c930bb2fc8fb9a",
+                "reference": "b80c4876a010cd8bfa9c78de64c930bb2fc8fb9a",
                 "shasum": ""
             },
             "require": {
-                "ext-hash": "*",
-                "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "ext-sodium": "*",
                 "lcobucci/clock": "^2.0",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "infection/infection": "^0.21",
+                "infection/infection": "^0.20",
                 "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6.7",
-                "phpbench/phpbench": "^1.0@alpha",
+                "mikey179/vfsstream": "^1.6",
+                "phpbench/phpbench": "^0.17",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^9.4"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
@@ -1505,7 +1507,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/4.1.1"
+                "source": "https://github.com/lcobucci/jwt/tree/4.0.1"
             },
             "funding": [
                 {
@@ -1517,7 +1519,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-02-16T09:59:04+00:00"
+            "time": "2021-01-28T00:13:50+00:00"
         },
         {
             "name": "league/commonmark",
@@ -5966,18 +5968,6 @@
         },
         {
             "name": "facade/ignition",
-<<<<<<< HEAD
-            "version": "2.5.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facade/ignition.git",
-                "reference": "be73521836f978106b3c3cf57de7eaeb261af520"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/be73521836f978106b3c3cf57de7eaeb261af520",
-                "reference": "be73521836f978106b3c3cf57de7eaeb261af520",
-=======
             "version": "2.5.13",
             "source": {
                 "type": "git",
@@ -5988,7 +5978,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facade/ignition/zipball/5e9ef386aaad9985cee2ac23281a27568d083b7e",
                 "reference": "5e9ef386aaad9985cee2ac23281a27568d083b7e",
->>>>>>> edit_profile_student
                 "shasum": ""
             },
             "require": {
@@ -6052,11 +6041,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-<<<<<<< HEAD
-            "time": "2021-02-15T07:55:43+00:00"
-=======
             "time": "2021-02-16T12:46:19+00:00"
->>>>>>> edit_profile_student
         },
         {
             "name": "facade/ignition-contracts",
