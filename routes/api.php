@@ -44,6 +44,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
     Route::get('student/get-all', [StudentController::class, 'getAll']);
+
+    //Rutas Admin
+    Route::get('user/get-all', [AuthController::class, 'getAll']);
+    Route::delete('user/{user_id}', [AuthController::class, 'delete']);
+    Route::put('user/{user_id}', [AuthController::class, 'update']);
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas

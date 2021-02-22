@@ -74,4 +74,41 @@ class AuthController extends Controller
         }
         return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
     }
+
+    public function getAll() {
+        $data = json_encode(User::all());
+        return response()->json($data,200);
+    }
+
+    public function delete($userId) {
+        $user= User::where('id',$userId)->first();
+
+        // Si no existe esa oferta devolvemos un error.
+        if (!$user) {
+
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
+        }
+
+        $user->delete();
+
+        return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' borrado.'], 200);
+    }
+
+    public function update(Request $request, $userId) {
+        $user= User::where('id',$userId)->first();
+
+        // Si no existe esa oferta devolvemos un error.
+        if (!$user) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
+        }
+
+        $password = Hash::make($request->get('password'));
+
+        $user->id = $request->get('id');
+        $user->password = $password;
+
+        $user->save();
+
+        return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
+    }
 }
