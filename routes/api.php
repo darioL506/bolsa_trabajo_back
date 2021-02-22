@@ -42,7 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('companyId/{user_id}', [CompanyController::class, 'getCompanyId']); // Devuelve una compañia
 
     //Rutas alumno
-    Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
+    Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']); //Actualiza un alumno
+    Route::get('offersActive', [OfferController::class, 'activeOffers']); // Devuelve todas las ofertas activas
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
