@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
+    Route::get('student/get-all', [StudentController::class, 'getAll']);
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
@@ -52,7 +53,6 @@ Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']);
 
 Route::post('student/insert', [StudentController::class, 'insertStudents']);
 Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
-Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
 
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);

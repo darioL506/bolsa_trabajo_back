@@ -13,7 +13,6 @@ class StudentController extends Controller
 {
     public function insertStudents(Request $request) {
 
-
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
