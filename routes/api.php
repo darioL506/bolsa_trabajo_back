@@ -38,21 +38,26 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
 
+    Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
+    Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
+
+
     // Rutas para compañias
-    Route::get('companyId/{user_id}', [CompanyController::class, 'getCompanyId']); // Devuelve una compañia
+
+
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
+    Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
+    Route::get('student/get-all', [StudentController::class, 'getAll']);
 });
+
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
 
-Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
-Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
-
+//Rutas para alumno
 Route::post('student/insert', [StudentController::class, 'insertStudents']);
-Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
-Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
-
+//Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
+Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);

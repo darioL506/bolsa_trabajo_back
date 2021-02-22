@@ -68,10 +68,12 @@ class AuthController extends Controller
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
         $rol = UserRolesController::getRol($us->id);
-        $company_id = "";
         if ($rol->rol_id == 4) {
-            $company_id = CompanyController::getCompanyId($us->id);
+            $company = CompanyController::getCompany($us->id);
+
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id], 'code' => 200], 200);
+        } else {
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
         }
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
     }
 }
