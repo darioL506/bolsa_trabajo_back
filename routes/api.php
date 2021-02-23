@@ -8,6 +8,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AreaController;
+use Laravel\Passport\Passport;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,18 +29,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::middleware(['cors'])->group(function () {
+    Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
+    Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
+    Route::get('offersbyid/{id}', [OfferController::class, 'index']); // Devuelve todas las ofertas de una compañia en concreto
+
+    Passport::routes();
+});
+
+Route::middleware(['auth:api'])->group(function () {
     // Rutas para ofertas
     Route::get('offers', [OfferController::class, 'index']); // Devuelve todas las ofertas
     Route::get('offers/{id}', [OfferController::class, 'indexById']); // Devuelve una oferta
-    Route::get('offersbyid/{id}', [OfferController::class, 'index']); // Devuelve todas las ofertas de una compañia en concreto
     Route::get('offers/{offer}', [OfferController::class, 'show']); // Devuelve una oferta
     Route::post('offers', [OfferController::class, 'store']); // Guarda una nueva oferta
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
 
-    // Rutas para compañias
 
+    // Rutas para compañias
+    Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
     Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
@@ -54,8 +63,3 @@ Route::post('student/insert', [StudentController::class, 'insertStudents']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
 //Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
-Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);
-
-
-Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
-Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
