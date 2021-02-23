@@ -12,6 +12,7 @@ class Student extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+        'student_id',
         'name',
         'lastnames',
         'dni',

@@ -38,13 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
 
-    Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
-    Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
-
-
     // Rutas para compañias
-
-
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
@@ -61,3 +55,7 @@ Route::get('student/{user_Id}', [StudentController::class, 'get']);
 //Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
 Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);
+
+
+Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
+Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
