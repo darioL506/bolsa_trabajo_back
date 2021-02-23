@@ -8,6 +8,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AreaController;
+use \App\Http\Controllers\InterviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']); //Actualiza un alumno
     Route::get('offersActive', [OfferController::class, 'activeOffers']); // Devuelve todas las ofertas activas
+
+    //Rutas para gestion oferta/alumno
+    Route::post('studentOffer', [InterviewController::class, 'newInterview']);
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas

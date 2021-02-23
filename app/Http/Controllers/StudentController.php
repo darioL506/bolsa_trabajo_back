@@ -85,6 +85,11 @@ class StudentController extends Controller
         $data = json_encode($alumno);
         return response()->json(['code' => 200, $data], 200);
     }
+
+    public static function getStudent($user_id)
+    {
+        return $student = Student::where('user_id', $user_id)->first();
+    }
 }
 
 

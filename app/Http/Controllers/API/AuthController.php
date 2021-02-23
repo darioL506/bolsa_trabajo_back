@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StudentController;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
@@ -69,9 +70,13 @@ class AuthController extends Controller
         $us = auth()->user();
         $rol = UserRolesController::getRol($us->id);
         $company_id = "";
+        $student_id = "";
+        if ($rol->rol_id == 3) {
+            $student = StudentController::getStudent($us->id);
+        }
         if ($rol->rol_id == 4) {
             $company_id = CompanyController::getCompanyId($us->id);
         }
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
+        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id, 'student_id' => $student->id], 'code' => 200], 200);
     }
 }
