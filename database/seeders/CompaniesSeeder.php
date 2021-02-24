@@ -18,7 +18,7 @@ class CompaniesSeeder extends Seeder
 
         $fak = Factory::create('es_ES');
         $o = new Company();
-        $o->cif = $fak->numberBetween(111111111, 999999999);
+        $o->cif = $fak->vat;
         $o->name = 'indra';
         $o->section = 'consultora informatica';
         $o->user_id = 4;
@@ -29,7 +29,8 @@ class CompaniesSeeder extends Seeder
         $fak = Factory::create('es_ES');
         for ($i = 21; $i <= 36; $i++) {
             $o = new Company();
-            $o->cif = $fak->numberBetween(111111111, 999999999);
+            $o->cif =
+                $fak->vat;
             $o->name = $fak->name();
             $o->section = $fak->text($maxNbChars = 10);
             $o->user_id = $i;
