@@ -111,4 +111,18 @@ class AuthController extends Controller
 
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
     }
+
+    public function activate(Request $request, $userId) {
+        $user= User::where('id',$userId)->first();
+
+        if (!$user) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
+        }
+
+        $user->isActive = $request->get('activate');
+
+        $user->save();
+
+        return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
+    }
 }
