@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,11 @@ class CompanyController extends Controller
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $cp], 201);
     }
 
+    public function getAllStudents()
+    {
+        $data = json_encode(Student::all());
+        return response()->json($data, 200);
+    }
 
     public function updateCompany(Request $request, $user_id)
     {

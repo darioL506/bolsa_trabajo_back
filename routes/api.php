@@ -34,6 +34,10 @@ Route::middleware(['cors'])->group(function () {
     Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
     Route::get('offersbyid/{id}', [OfferController::class, 'index']); // Devuelve todas las ofertas de una compañia en concreto
 
+    //alumnos
+    Route::get('student/get-all', [StudentController::class, 'getAll']);
+    Route::get('areas/{user_id}', [StudentController::class, 'getAreas']);
+
     Passport::routes();
 });
 
@@ -49,10 +53,10 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Rutas para compañias
     Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);
+
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
     Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
-    Route::get('student/get-all', [StudentController::class, 'getAll']);
 });
 
 // Rutas para Areas

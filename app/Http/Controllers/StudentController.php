@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\StudentArea;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Http\Request;
@@ -11,15 +12,19 @@ use PHPUnit\Util\Json;
 
 class StudentController extends Controller
 {
-    public function insertStudents(Request $request) {
-
-
+    public function getAreas($user_Id)
+    {
+        $data = json_encode(StudentArea::getAreabyUserId($user_Id));
+        return response()->json($data, 200);
+    }
+    public function insertStudents(Request $request)
+    {
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
         $st->user_id = $request->get('id');
-        $st->birthdate = implode("-",$request->get('birthdate'));
+        $st->birthdate = implode("-", $request->get('birthdate'));
         $st->phone = $request->get('phone');
         $st->aptitudes = $request->get('aptitudes');
         $st->save();
@@ -29,24 +34,24 @@ class StudentController extends Controller
         $stAr->area_id = $request->get('area');
         $stAr->save();
 
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st ], 201);
-
+        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st], 201);
     }
 
-    public function updateStudent(Request $request, $user_Id) {
+    public function updateStudent(Request $request, $user_Id)
+    {
 
-        $alumno = Student::where('user_id',$user_Id)->first();
+        $alumno = Student::where('user_id', $user_Id)->first();
 
         if (!$alumno) {
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No existe el alumno con ese código.'])], 404);
         }
 
-        $stAr = StudentArea::where('user_id',$user_Id)->first();
+        $stAr = StudentArea::where('user_id', $user_Id)->first();
 
         $alumno->name = $request->get('name');
         $alumno->lastnames = $request->get('lastName');
         $alumno->dni = $request->get('dni');
-        $alumno->birthdate = implode("-",$request->get('birthdate'));
+        $alumno->birthdate = implode("-", $request->get('birthdate'));
         $alumno->phone = $request->get('phone');
         $alumno->aptitudes = $request->get('aptitudes');
         $alumno->save();
@@ -58,7 +63,8 @@ class StudentController extends Controller
 
         return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizadp.'], 200);
     }
-    public function deleteStudent($student) {
+    public function deleteStudent($student)
+    {
 
         $alumno = Student::find($student);
 
@@ -72,19 +78,19 @@ class StudentController extends Controller
         return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' borrado.'], 200);
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $data = json_encode(Student::all());
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function get($user_Id) {
-        $alumno = Student::where('user_id',$user_Id)->first();
-        if(!$alumno) {
+    public function get($user_Id)
+    {
+        $alumno = Student::where('user_id', $user_Id)->first();
+        if (!$alumno) {
             return response()->json(['code' => 404, 'message' => 'No se encuentra el alumno ' . $alumno], 404);
         }
         $data = json_encode($alumno);
         return response()->json(['code' => 200, $data], 200);
     }
 }
-
-

@@ -20,5 +20,6 @@ class Student extends Model
         'birthdate',
         'phone',
         'aptitudes',
+        'status',
     ];
 }

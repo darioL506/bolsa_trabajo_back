@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
             $table->date('birthdate');
             $table->integer('phone');
             $table->string('aptitudes', 500);
-
+            $table->integer('status');
             $table->timestamps();
         });
     }
