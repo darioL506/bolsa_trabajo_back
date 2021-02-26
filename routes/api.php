@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('user/{user_id}', [AuthController::class, 'delete']);
     Route::put('user/{user_id}', [AuthController::class, 'update']);
     Route::put('user/activate/{user_id}', [AuthController::class, 'activate']);
+    Route::get('areas/{area_id}', [AreaController::class, 'delete']);
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
