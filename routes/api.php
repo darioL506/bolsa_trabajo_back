@@ -55,7 +55,8 @@ Route::middleware(['auth:api'])->group(function () {
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']); //Actualiza un alumno
     Route::get('offersActive', [OfferController::class, 'activeOffers']); // Devuelve todas las ofertas activas
-
+    Route::get('offersActive/{user_id}', [OfferController::class, 'activeOffersAl']); // Devuelve todas las ofertas activas en las que no se está apuntado
+    Route::get('getStudentInterview/{student_id}', [InterviewController::class, 'getStudentInterview']);
 
 });
 // Rutas para Areas

@@ -61,7 +61,31 @@ class OfferController extends Controller
         return $offer;
     }
 
+    //Función que devuelve las ofertas activas ordenadas por fecha de finalización
     public function activeOffers()
+    {
+        // return Offer::all()->offer Area;
+        $offer = \DB::table('offers')
+            ->join('areas', 'offers.area_id', '=', 'areas.id')
+            ->select(
+                'offers.id',
+                'offers.vacant',
+                'offers.name',
+                'offers.description',
+                'offers.startDate',
+                'offers.endDate',
+                'offers.area_id',
+                'offers.isActive',
+                'areas.description as area_description'
+            )
+            ->where('offers.isActive', '=', '1')
+            ->orderBy('offers.endDate')
+            ->get();
+
+        return $offer;
+    }
+
+    public function activeOffersAl($user_id)
     {
         // return Offer::all()->offer Area;
         $offer = \DB::table('offers')
