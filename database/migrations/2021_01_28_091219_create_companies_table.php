@@ -24,7 +24,6 @@ class CreateCompaniesTable extends Migration
             $table->string('section',250);
             $table->string('description',500);
             $table->date('foundation');
-            $table->boolean('isActive')->default(0);
             $table->timestamps();
 
         });

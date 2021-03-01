@@ -43,6 +43,16 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
+    Route::get('student/get-all', [StudentController::class, 'getAll']);
+
+    //Rutas Admin
+    Route::get('user/get-all', [AuthController::class, 'getAll']);
+    Route::delete('user/{user_id}', [AuthController::class, 'delete']);
+    Route::put('user/{user_id}', [AuthController::class, 'update']);
+    Route::put('user/activate/{user_id}', [AuthController::class, 'activate']);
+    Route::delete('areas/{area_id}', [AreaController::class, 'delete']);
+    Route::post('areas/insert',[AreaController::class, 'newArea']);
+    Route::put('areas/{area_id}',[AreaController::class, 'update']);
 });
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
@@ -52,7 +62,7 @@ Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']);
 
 Route::post('student/insert', [StudentController::class, 'insertStudents']);
 Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
-Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
 
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
+

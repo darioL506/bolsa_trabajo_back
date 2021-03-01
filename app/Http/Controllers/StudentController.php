@@ -13,7 +13,6 @@ class StudentController extends Controller
 {
     public function insertStudents(Request $request) {
 
-
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
@@ -29,7 +28,7 @@ class StudentController extends Controller
         $stAr->area_id = $request->get('area');
         $stAr->save();
 
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st ], 201);
+
 
     }
 
