@@ -28,7 +28,7 @@ class StudentController extends Controller
         $stAr->area_id = $request->get('area');
         $stAr->save();
 
-        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st ], 201);
+
 
     }
 

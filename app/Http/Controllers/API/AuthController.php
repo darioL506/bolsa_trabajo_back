@@ -102,6 +102,8 @@ class AuthController extends Controller
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
         }
 
+        $user->email = $request->get('email');
+
         $password = Hash::make($request->get('password'));
 
         $user->id = $request->get('id');

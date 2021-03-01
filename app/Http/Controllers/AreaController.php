@@ -34,4 +34,25 @@ class AreaController extends Controller
 
    }
 
+    public function newArea(Request $request) {
+        $area = new Area();
+        $area->description = $request->get('nombre');
+        $area->save();
+
+        return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $area ], 201);
+    }
+
+    public function update($areaId, Request $request){
+        $area = Area::find($areaId);
+
+        if (!$area) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra un ciclo con ese código ' . $area])], 404);
+        }
+
+        $area->description = $request->get('nombre');
+        $area->save();
+
+        return response()->json(['code' => 201, 'message' => 'Datos actualizados: ' . $area ], 201);
+    }
+
 }
