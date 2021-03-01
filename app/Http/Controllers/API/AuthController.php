@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StudentController;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
+        // REGISTRO
         if (User::where('email', $request->get('email'))->count() == 1) {
             return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
         }
@@ -52,6 +54,7 @@ class AuthController extends Controller
         return response()->json(['message' => ['user' => $user, 'access_token' => $accessToken], 'code' => 201], 201);
     }
 
+    //LOGIN
     public function login(Request $request)
     {
         $loginData = $request->validate([
@@ -68,11 +71,16 @@ class AuthController extends Controller
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
         $rol = UserRolesController::getRol($us->id);
-        $company_id = "";
-        if ($rol->rol_id == 4) {
-            $company_id = CompanyController::getCompanyId($us->id);
+        if ($rol->rol_id === 4) {
+            $company = CompanyController::getCompany($us->id);
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id], 'code' => 200], 200);
+        } else if ($rol->rol_id == 3) {
+            $student = StudentController::getStudent($us->id);
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'student_id' => $student->id], 'code' => 200], 200);
+        } else {
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
         }
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
+
     }
 
     public function getAll() {
