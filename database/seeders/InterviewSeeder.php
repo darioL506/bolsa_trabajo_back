@@ -17,22 +17,15 @@ class InterviewSeeder extends Seeder
     {
         // Creamos 20 envios a las ofertas desde los alumnos
         $fak = Factory::create('es_ES');
-        for($i=1;$i<=10;$i++){
-            $o = new Interview;
-            $o->student_id = $fak->numberBetween(1, 10);
-            $o->offer_id = $fak->numberBetween(1, 10);
-            $o->send_to = 1;
-            $o->save();
-        }
-
-        // Creamos 20 envios a las ofertas desde los alumnos
-        $fak = Factory::create('es_ES');
-            for($i=1;$i<=10;$i++){
+        for ($j = 1; $j <= 18; $j++) {
+            for ($i = 1; $i <= 90; $i++) {
                 $o = new Interview;
-                $o->student_id = $fak->numberBetween(1, 5);
-                $o->offer_id = $fak->numberBetween(1, 10);
-                $o->send_to = 0;
+                $o->student_id = $j;
+                $o->offer_id = $i;
+                $o->Joined_by = $fak->numberBetween(0, 1);
+                $o->isActive = $fak->numberBetween(0, 2);
                 $o->save();
+            }
         }
     }
 }

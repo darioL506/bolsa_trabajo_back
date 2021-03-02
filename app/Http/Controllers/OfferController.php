@@ -55,7 +55,7 @@ class OfferController extends Controller
                 'offers.isActive',
                 'areas.description as area_description'
             )
-            ->where('areas.id', '=', $id)
+            ->where('offers.company_id', '=', $id)
             ->get();
 
         return $offer;

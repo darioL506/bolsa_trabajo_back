@@ -1,7 +1,6 @@
 #!/bin/sh
 cp .env.example .env
-echo "export PATH="$HOME/.config/composer/vendor/bin:$PATH"" >> ~/.bashrc
-
+echo "export PATH="$HOME/.config/composer/vendor/bin:$PATH"" >>~/.bashrc
 
 composer update
 
