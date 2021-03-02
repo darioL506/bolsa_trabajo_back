@@ -70,26 +70,31 @@ class AuthController extends Controller
 
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
-        $rol = UserRolesController::getRol($us->id);
-        if ($rol->rol_id === 4) {
-            $company = CompanyController::getCompany($us->id);
-            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id], 'code' => 200], 200);
-        } else if ($rol->rol_id == 3) {
-            $student = StudentController::getStudent($us->id);
-            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'student_id' => $student->id], 'code' => 200], 200);
+        if ($us->isActive === 1) {
+            $rol = UserRolesController::getRol($us->id);
+            if ($rol->rol_id === 4) {
+                $company = CompanyController::getCompany($us->id);
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id], 'code' => 200], 200);
+            } elseif ($rol->rol_id == 3) {
+                $student = StudentController::getStudent($us->id);
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'student_id' => $student->id], 'code' => 200], 200);
+            } else {
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
+            }
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
         } else {
-            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
+            return response()->json(['message' => 'Usuario desactivado,contacte con el administrador', 'code' => 400], 400);
         }
-        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
     }
-
-    public function getAll() {
+    public function getAll()
+    {
         $data = json_encode(User::all());
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function delete($userId) {
-        $user= User::where('id',$userId)->first();
+    public function delete($userId)
+    {
+        $user = User::where('id', $userId)->first();
 
         // Si no existe esa oferta devolvemos un error.
         if (!$user) {
@@ -102,8 +107,9 @@ class AuthController extends Controller
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' borrado.'], 200);
     }
 
-    public function update(Request $request, $userId) {
-        $user= User::where('id',$userId)->first();
+    public function update(Request $request, $userId)
+    {
+        $user = User::where('id', $userId)->first();
 
         // Si no existe esa oferta devolvemos un error.
         if (!$user) {
@@ -122,8 +128,9 @@ class AuthController extends Controller
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
     }
 
-    public function activate(Request $request, $userId) {
-        $user= User::where('id',$userId)->first();
+    public function activate(Request $request, $userId)
+    {
+        $user = User::where('id', $userId)->first();
 
         if (!$user) {
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
