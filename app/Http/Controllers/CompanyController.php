@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -24,69 +25,30 @@ class CompanyController extends Controller
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $cp], 201);
     }
 
-    // public function insertcpudents(Requecp $requecp): \Illuminate\Http\JsonResponse
-    // {
+    public function getAllStudents()
+    {
+        $data = json_encode(Student::all());
+        return response()->json($data, 200);
+    }
 
-    //     $cp = new Company();
-    //     //$cp->user_id = $requecp->get('user_id');
-    //     $cp->cif = $requecp->get('cif');
-    //     $cp->name = $requecp->get('name');
-    //     $cp->foundation = implode("-", $requecp->get('foundation'));
-    //     $cp->section = $requecp->get('section');
-    //     $cp->description = $requecp->get('description');
-    //     $cp->save();
+    public function updateCompany(Request $request, $user_id)
+    {
 
+        $empresa = Company::where('user_id', $user_id)->first();
 
-    //     return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $cp], 201);
+        if (!$empresa) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No existe el empresa con ese código.'])], 404);
+        }
 
-    // }
+        $empresa->name = $request->get('name');
+        $empresa->cif = $request->get('cif');
+        $empresa->foundation = implode("-", $request->get('birthdate'));
+        $empresa->sector = $request->get('section');
+        $empresa->description = $request->get('description');
+        $empresa->save();
 
-    // public function updateCompany(Requecp $requecp, $company): \Illuminate\Http\JsonResponse
-    // {
-
-    //     $comp = Company::find($company);
-
-    //     if (!$comp) {
-    //         return response()->json(['errors' => array(['code' => 404, 'message' => 'No exicpe el alumno con ese código.'])], 404);
-    //     }
-
-    //     $comp->name = $requecp->get('name');
-    //     $comp->lacpnames = $requecp->get('lacpName');
-    //     $comp->dni = $requecp->get('dni');
-    //     $comp->birthdate = implode("-", $requecp->get('birthdate'));
-    //     $comp->phone = $requecp->get('phone');
-    //     $comp->area = $requecp->get('area');
-    //     $comp->aptitudes = $requecp->get('aptitudes');
-
-    //     $comp->save();
-    //     //return response()->json(['cpatus'=>'ok','data'=>$fabricante],200);
-    //     return response()->json($comp, 200);
-    // }
-
-    // public function deleteCompany($company): \Illuminate\Http\JsonResponse
-    // {
-
-    //     $comp = cpudent::find($company);$cp->description = $requecp->get('description');
-
-
-    //     if (!$comp) {
-    //         return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra un artículo con ese código ' . $alumno])], 404);
-    //     }
-
-    //     $comp->delete();
-
-    //     return response()->json(['code' => 200, 'message' => 'Alumno ' . $comp . ' borrado.'], 200);
-    // }
-
-    // public function get($company)
-    // {
-    //     $comp = Company::find($company);
-    //     if (!$comp) {
-    //         return response()->json(['code' => 404, 'message' => 'No se encuentra el alumno ' . $company], 404);
-    //     }
-    //     $data = json_encode($comp);
-    //     return response()->json(['code' => 200, $data], 200);
-    // }
+        return response()->json(['code' => 200, 'message' => 'empresa ' . $empresa . ' actualizado.'], 200);
+    }
 
     public function getAll()
     {
@@ -95,13 +57,8 @@ class CompanyController extends Controller
     }
 
     // Funcion para devolver una compañia por el user_id
-    public static function getCompanyId($user_id)
+    public static function getCompany($user_id)
     {
-        $company = Company::where('user_id', $user_id)->first();;
-        if (!$company) {
-            return response()->json(['code' => 404, 'message' => 'No se encuentra la empresa ' . $company], 404);
-        }
-        $data = json_encode($company);
-        return response()->json(['code' => 200, $data], 200);
+        return $company = Company::where('user_id', $user_id)->first();;
     }
 }

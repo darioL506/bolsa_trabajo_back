@@ -10,7 +10,7 @@ class Area extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description',
+        'area_id',
+        'description'
     ];
-
 }

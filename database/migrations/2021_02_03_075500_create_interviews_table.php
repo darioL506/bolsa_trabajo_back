@@ -22,14 +22,14 @@ class CreateInterviewsTable extends Migration
         Schema::create('interviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')
-                    ->constrained('students')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                ->constrained('students')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('offer_id')
-                    ->constrained('offers')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            $table->integer('send_to')->nullable();
+                ->constrained('offers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('Joined_by');
             $table->integer('isActive')->default(0);
             $table->timestamps();
         });

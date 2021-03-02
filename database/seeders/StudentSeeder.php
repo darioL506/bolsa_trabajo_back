@@ -30,6 +30,7 @@ class StudentSeeder extends Seeder
         $st->birthdate = $fak->date('Y-m-d');
         $st->phone = $fak->numberBetween(100000000, 999999999);
         $st->aptitudes = $fak->paragraph(3);
+        $st->status = $fak->numberBetween(0, 2);
         $st->save();
 
         $fak = \Faker\Factory::create('es_ES');
@@ -39,8 +40,9 @@ class StudentSeeder extends Seeder
         $st->dni = '06280822M';
         $st->user_id = 3;
         $st->birthdate = $fak->date('Y-m-d');
-        $st->phone = $fak->numberBetween(100000000, 999999999);
+        $st->phone = $fak->numberBetween(600000000, 799999999);
         $st->aptitudes = $fak->paragraph(3);
+        $st->status = $fak->numberBetween(0, 2);
         $st->save();
 
         $fak = \Faker\Factory::create('es_ES');
@@ -49,11 +51,12 @@ class StudentSeeder extends Seeder
             $st = new Student();
             $st->name = $fak->firstName;
             $st->lastnames = $fak->lastName;
-            $st->dni = $dni[$i - 5];
+            $st->dni = $fak->dni;
             $st->user_id = $i;
             $st->birthdate = $fak->date('Y-m-d');
-            $st->phone = $fak->numberBetween(100000000, 999999999);
+            $st->phone = $fak->numberBetween(600000000, 799999999);
             $st->aptitudes = $fak->paragraph(3);
+            $st->status = $fak->numberBetween(0, 2);
             $st->save();
         }
     }

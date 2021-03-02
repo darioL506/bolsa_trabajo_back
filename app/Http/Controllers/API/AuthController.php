@@ -80,7 +80,7 @@ class AuthController extends Controller
         } else {
             return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
         }
-
+        return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company_id], 'code' => 200], 200);
     }
 
     public function getAll() {
