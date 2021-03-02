@@ -11,3 +11,4 @@ chmod 777 -R /app
 php artisan migrate --seed
 php artisan passport:install --force
 php artisan serve --host=0.0.0.0 --port=$APP_PORT
+#php artisan migrate:refresh --seed

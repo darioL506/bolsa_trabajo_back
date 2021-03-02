@@ -85,6 +85,29 @@ class OfferController extends Controller
         return $offer;
     }
 
+    public function getOffersInterview($student_id) {
+        $offer = \DB::table('offers')
+            ->join('areas', 'offers.area_id', '=', 'areas.id')
+            ->join('interviews','offers.id', '=', 'interviews.offer_id')
+            ->select(
+                'offers.id',
+                'offers.vacant',
+                'offers.name',
+                'offers.description',
+                'offers.startDate',
+                'offers.endDate',
+                'offers.area_id',
+                'offers.isActive',
+                'areas.description as area_description'
+            )
+            ->where('offers.isActive', '=', '1')
+            ->where('interviews.student_id', '=', $student_id)
+            ->orderBy('offers.endDate')
+            ->get();
+
+        return $offer;
+    }
+
     public function activeOffersAl($user_id)
     {
         // return Offer::all()->offer Area;

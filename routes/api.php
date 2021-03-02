@@ -60,6 +60,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('offersActive', [OfferController::class, 'activeOffers']); // Devuelve todas las ofertas activas
     Route::get('offersActive/{user_id}', [OfferController::class, 'activeOffersAl']); // Devuelve todas las ofertas activas en las que no se está apuntado
     Route::get('getStudentInterview/{student_id}', [InterviewController::class, 'getStudentInterview']);
+    Route::get('offersInterview/{user_id}', [OfferController::class, 'getOffersInterview']);
+
     //Rutas Admin
     Route::get('user/get-all', [AuthController::class, 'getAll']);
     Route::delete('user/{user_id}', [AuthController::class, 'delete']);
