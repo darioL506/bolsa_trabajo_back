@@ -59,6 +59,12 @@ class CompanyController extends Controller
     // Funcion para devolver una compañia por el user_id
     public static function getCompany($user_id)
     {
-        return $company = Company::where('user_id', $user_id)->first();;
+        return $company = Company::where('user_id', $user_id)->first();
+    }
+
+    // Funcion para devolver una compañia por el company_id
+    public static function getCompanyById($company_id)
+    {
+        return $company = Company::where('id', $company_id)->first();
     }
 }

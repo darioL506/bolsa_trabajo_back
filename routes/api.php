@@ -53,6 +53,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Rutas para compañias
     Route::get('company/{user_id}', [CompanyController::class, 'getCompany']);
+    Route::get('companyById/{company_id}', [CompanyController::class, 'getCompanyById']);
 
     //Rutas alumno
     Route::put('student/{user_Id}', [StudentController::class, 'updateStudent']);
