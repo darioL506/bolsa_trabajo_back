@@ -18,18 +18,11 @@ class InterviewController extends Controller
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No existe el oferta con ese código.'])], 404);
         }
 
-        $vacants = $offer->vacant;
-
-        $vacants--;
-
-        $offer->vacant = $vacants;
-
         $inter->student_id = $request->get('studentId');
         $inter->offer_id = $offerId;
         $inter->Joined_by = $request->get('sended');
 
         $inter->save();
-        $offer->save();
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $inter ], 201);
     }
@@ -48,4 +41,33 @@ class InterviewController extends Controller
 
         return response()->json(['code' => 201, 'message' => 'Datos recogidos: ', 'data' => $interviews ], 201);
     }
+
+    public function unsubInter($interId) {
+
+        $inter = Interview::where('id',$interId)->first();
+
+        if (!$inter) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'Error al buscar'])], 404);
+        }
+
+        $inter->isActive = 2;
+        $inter->save();
+
+        return response()->json(['code' => 201, 'message' => 'Datos eliminados: ', 'data' => $inter ], 201);
+    }
+
+    public function acpetInter($interId) {
+
+        $inter = Interview::where('id',$interId)->first();
+
+        if (!$inter) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'Error al buscar'])], 404);
+        }
+
+        $inter->isActive = 1;
+        $inter->save();
+
+        return response()->json(['code' => 201, 'message' => 'Datos eliminados: ', 'data' => $inter ], 201);
+    }
+
 }

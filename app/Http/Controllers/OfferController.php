@@ -106,7 +106,8 @@ class OfferController extends Controller
                 'companies.name as companyName',
                 'areas.description as area_description',
                 'interviews.Joined_by',
-                'interviews.id as interId'
+                'interviews.id as interId',
+                'interviews.isActive as interActive'
             )
             ->where('offers.isActive', '=', '1')
             ->where('interviews.student_id', '=', $student_id)

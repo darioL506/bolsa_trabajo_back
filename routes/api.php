@@ -39,6 +39,9 @@ Route::middleware(['cors'])->group(function () {
     Route::get('areas/{user_id}', [StudentController::class, 'getAreas']);
     //Rutas para gestion oferta/alumno
     Route::post('studentOffer', [InterviewController::class, 'newInterview']);
+    Route::put('unsubInter/{inter_id}',[InterviewController::class, 'unsubInter']);
+    Route::put('unsubAcept/{inter_id}',[InterviewController::class, 'aceptInter']);
+
     Passport::routes();
 });
 Route::middleware(['auth:api'])->group(function () {
@@ -62,6 +65,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('offersActive/{user_id}', [OfferController::class, 'activeOffersAl']); // Devuelve todas las ofertas activas en las que no se está apuntado
     Route::get('getStudentInterview/{student_id}', [InterviewController::class, 'getStudentInterview']);
     Route::get('offersInterview/{user_id}', [OfferController::class, 'getOffersInterview']);
+
 
     //Rutas Admin
     Route::get('user/get-all', [AuthController::class, 'getAll']);
