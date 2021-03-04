@@ -67,6 +67,7 @@ class OfferController extends Controller
         // return Offer::all()->offer Area;
         $offer = \DB::table('offers')
             ->join('areas', 'offers.area_id', '=', 'areas.id')
+            ->join('companies', 'offers.company_id', '=', 'companies.id')
             ->select(
                 'offers.id',
                 'offers.vacant',
@@ -76,6 +77,8 @@ class OfferController extends Controller
                 'offers.endDate',
                 'offers.area_id',
                 'offers.isActive',
+                'companies.id as companyId',
+                'companies.name as companyName',
                 'areas.description as area_description'
             )
             ->where('offers.isActive', '=', '1')
@@ -89,6 +92,7 @@ class OfferController extends Controller
         $offer = \DB::table('offers')
             ->join('areas', 'offers.area_id', '=', 'areas.id')
             ->join('interviews','offers.id', '=', 'interviews.offer_id')
+            ->join('companies', 'offers.company_id', '=', 'companies.id')
             ->select(
                 'offers.id',
                 'offers.vacant',
@@ -98,7 +102,12 @@ class OfferController extends Controller
                 'offers.endDate',
                 'offers.area_id',
                 'offers.isActive',
-                'areas.description as area_description'
+                'companies.id as companyId',
+                'companies.name as companyName',
+                'areas.description as area_description',
+                'interviews.Joined_by',
+                'interviews.id as interId',
+                'interviews.isActive as interActive'
             )
             ->where('offers.isActive', '=', '1')
             ->where('interviews.student_id', '=', $student_id)
