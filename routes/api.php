@@ -85,5 +85,7 @@ Route::post('student/insert', [StudentController::class, 'insertStudents']);
 Route::delete('student/delete/{student}', [StudentController::class, 'deleteStudent']);
 Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
+Route::delete('deleteLast/{user_id}', [AuthController::class, 'delete']);
+
 //Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
