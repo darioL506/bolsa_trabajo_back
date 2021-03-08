@@ -19,20 +19,28 @@ class StudentController extends Controller
     }
     public function insertStudents(Request $request)
     {
+
+        $id = $request->get('id');
+
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
         $st->dni = $request->get('dni');
-        $st->user_id = $request->get('id');
+        $st->user_id = $id;
         $st->birthdate = implode("-", $request->get('birthdate'));
         $st->phone = $request->get('phone');
         $st->aptitudes = $request->get('aptitudes');
+        $st->status = $request->get('status');
         $st->save();
 
-        $stAr = new StudentArea();
-        $stAr->user_id = $request->get('id');
-        $stAr->area_id = $request->get('area');
-        $stAr->save();
+        $areas = $request->get('areas');
+
+        foreach ($areas as $area) {
+            $stAr = new StudentArea();
+            $stAr->user_id = $id;
+            $stAr->area_id = $area;
+            $stAr->save();
+        }
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st], 201);
     }
@@ -46,20 +54,26 @@ class StudentController extends Controller
             return response()->json(['errors' => array(['code' => 404, 'message' => 'No existe el alumno con ese código.'])], 404);
         }
 
-        $stAr = StudentArea::where('user_id', $user_Id)->first();
-
         $alumno->name = $request->get('name');
         $alumno->lastnames = $request->get('lastName');
         $alumno->dni = $request->get('dni');
         $alumno->birthdate = implode("-", $request->get('birthdate'));
         $alumno->phone = $request->get('phone');
         $alumno->aptitudes = $request->get('aptitudes');
-        $alumno->save();
-
-        $stAr->area_id = $request->get('area');
-        $stAr->save();
+        $alumno->status = $request->get('status');
 
         $alumno->save();
+
+        $stAr = StudentArea::where('user_id', $user_Id)->delete();
+
+        $areas = $request->get('areas');
+
+        foreach ($areas as $area) {
+            $stAr = new StudentArea();
+            $stAr->user_id = $user_Id;
+            $stAr->area_id = $area;
+            $stAr->save();
+        }
 
         return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizadp.'], 200);
     }
