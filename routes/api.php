@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AreaController;
 use \App\Http\Controllers\InterviewController;
+use \App\Http\Controllers\StudentAreaController;
 use Laravel\Passport\Passport;
 
 /*
@@ -65,7 +66,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('offersActive/{user_id}', [OfferController::class, 'activeOffersAl']); // Devuelve todas las ofertas activas en las que no se está apuntado
     Route::get('getStudentInterview/{student_id}', [InterviewController::class, 'getStudentInterview']);
     Route::get('offersInterview/{user_id}', [OfferController::class, 'getOffersInterview']);
-
+    Route::get('studentArea/{user_id}', [StudentAreaController::class, 'getAreabyUserId']);
 
     //Rutas Admin
     Route::get('user/get-all', [AuthController::class, 'getAll']);
