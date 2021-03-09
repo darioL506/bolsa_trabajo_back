@@ -47,7 +47,6 @@ class StudentController extends Controller
 
     public function updateStudent(Request $request, $user_Id)
     {
-
         $alumno = Student::where('user_id', $user_Id)->first();
 
         if (!$alumno) {
@@ -75,7 +74,9 @@ class StudentController extends Controller
             $stAr->save();
         }
 
-        return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizadp.'], 200);
+        $data = json_encode($alumno);
+
+        return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizado.','data'=>$data], 200);
     }
     public function deleteStudent($student)
     {
