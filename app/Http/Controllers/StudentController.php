@@ -114,7 +114,7 @@ class StudentController extends Controller
         return response()->json($data, 200);
     }
 
-    public function get($user_Id)
+    public static function get($user_Id)
     {
         $alumno = Student::where('user_id', $user_Id)->first();
         if (!$alumno) {
