@@ -38,6 +38,31 @@ class OfferController extends Controller
         return $offer;
     }
 
+    public function indexActive($id)
+    {
+        // return Offer::all()->offerArea;
+        $offer = \DB::table('offers')
+        ->join('areas', 'offers.area_id', '=', 'areas.id')
+        ->select(
+            'offers.id',
+            'offers.vacant',
+            'offers.name',
+            'offers.description',
+            'offers.startDate',
+            'offers.endDate',
+            'offers.area_id',
+            'offers.isActive',
+            'areas.description as area_description'
+        )
+            ->where('offers.company_id', '=', $id)
+            ->where('offers.isActive','=', 1)
+            ->get();
+
+        return $offer;
+    }
+
+
+
     // Método que devuelve todas las ofertas y que pertenecen a un area.
     public function indexById($id)
     {

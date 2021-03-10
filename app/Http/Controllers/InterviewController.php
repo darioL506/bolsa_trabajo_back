@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class InterviewController extends Controller
 {
+
     public function newInterview(Request $request) {
         $inter = new Interview();
         $offerId = $request->get('offerId');

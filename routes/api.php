@@ -34,6 +34,9 @@ Route::middleware(['cors'])->group(function () {
     Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta
     Route::put('offers/desactive/{id}', [OfferController::class, 'desactiveOffer']); // Desactiva oferta
     Route::get('offersbyid/{id}', [OfferController::class, 'index']); // Devuelve todas las ofertas de una compañia en concreto
+    Route::get('offersbyidActive/{id}', [OfferController::class, 'indexActive']); // Devuelve todas las ofertas de una compañia en concreto
+
+
     //alumnos
     Route::get('student/get-all', [StudentController::class, 'getAll']);
     Route::get('areas/{user_id}', [StudentController::class, 'getAreas']);
