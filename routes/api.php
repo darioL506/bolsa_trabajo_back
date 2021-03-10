@@ -40,11 +40,14 @@ Route::middleware(['cors'])->group(function () {
     //alumnos
     Route::get('student/get-all', [StudentController::class, 'getAll']);
     Route::get('student/get-acepted/{company_id}', [StudentController::class, 'getAcepted']);
+    Route::get('student/get-wait/{company_id}', [StudentController::class, 'waitInter']);
     Route::get('areas/{user_id}', [StudentController::class, 'getAreas']);
     //Rutas para gestion oferta/alumno
     Route::post('studentOffer', [InterviewController::class, 'newInterview']);
     Route::put('unsubInter/{inter_id}',[InterviewController::class, 'unsubInter']);
     Route::put('unsubAcept/{inter_id}',[InterviewController::class, 'aceptInter']);
+
+
 
     Passport::routes();
 });

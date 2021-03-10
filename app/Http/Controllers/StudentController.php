@@ -100,7 +100,18 @@ class StudentController extends Controller
         ->get(['offers.name AS offer_name','students.*','interviews.*','users.*']));
         return response()->json($data, 200);
     }
+    public function waitInter($company_id)
+    {
 
+        $data = json_encode(\DB::table('offers')
+        ->join('interviews', 'interviews.offer_id', '=', 'offers.id')
+        ->join('students', 'students.id', '=', 'interviews.student_id')
+        ->join('users', 'users.id', '=', 'students.user_id')
+        ->where('offers.company_id', '=', $company_id)
+            ->where('interviews.isActive', '=', 0)
+            ->get(['offers.name AS offer_name', 'students.*', 'interviews.*', 'users.*']));
+        return response()->json($data, 200);
+    }
 
     public function get($user_Id)
     {
