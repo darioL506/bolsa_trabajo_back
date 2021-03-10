@@ -83,7 +83,33 @@ class StudentController extends Controller
         $data = json_encode(\DB::table('student_areas')
             ->join('areas', 'student_areas.area_id', '=', 'areas.id')
             ->join('students', 'students.user_id', '=', 'student_areas.user_id')
+            ->join('users','users.id','=','student_areas.user_id')
             ->get());
+        return response()->json($data, 200);
+    }
+
+    public function getAcepted($company_id)
+    {
+
+        $data = json_encode(\DB::table('offers')
+        ->join('interviews', 'interviews.offer_id', '=', 'offers.id')
+        ->join('students', 'students.id', '=', 'interviews.student_id')
+        ->join('users', 'users.id', '=', 'students.user_id')
+        ->where('offers.company_id','=',$company_id)
+        ->where('interviews.isActive', '=', 2)
+        ->get(['offers.name AS offer_name','students.*','interviews.*','users.*']));
+        return response()->json($data, 200);
+    }
+    public function waitInter($company_id)
+    {
+
+        $data = json_encode(\DB::table('offers')
+        ->join('interviews', 'interviews.offer_id', '=', 'offers.id')
+        ->join('students', 'students.id', '=', 'interviews.student_id')
+        ->join('users', 'users.id', '=', 'students.user_id')
+        ->where('offers.company_id', '=', $company_id)
+            ->where('interviews.isActive', '=', 0)
+            ->get(['offers.name AS offer_name', 'students.*', 'interviews.*', 'users.*']));
         return response()->json($data, 200);
     }
 
