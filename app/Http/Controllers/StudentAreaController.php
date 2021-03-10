@@ -15,7 +15,7 @@ class StudentAreaController extends Controller
     {
         return $area_id = StudentArea::select('area_id')
             ->join('areas', 'areas.id', '=', 'student_areas.area_id')
-            ->select('areas.id')
+            ->select('areas.description')
             ->where('student_areas.user_id', '=', $id)
             ->get();
     }
