@@ -87,7 +87,38 @@ class OfferController extends Controller
 
         return $offer;
     }
+    //company dash
 
+    public function getOffersInterviewCompany($company_id)
+    {
+        $offer = \DB::table('offers')
+        ->join('areas', 'offers.area_id', '=', 'areas.id')
+        ->join('interviews', 'offers.id', '=', 'interviews.offer_id')
+        ->join('companies', 'offers.company_id', '=', 'companies.id')
+        ->select(
+            'offers.id',
+            'offers.vacant',
+            'offers.name',
+            'offers.description',
+            'offers.startDate',
+            'offers.endDate',
+            'offers.area_id',
+            'offers.isActive',
+            'companies.id as companyId',
+            'companies.name as companyName',
+            'areas.description as area_description',
+            'interviews.Joined_by',
+            'interviews.id as interId',
+            'interviews.isActive as interActive'
+        )
+            ->where('offers.isActive', '=', '1')
+            ->where('offers.company_id', '=', $company_id)
+            ->orderBy('offers.endDate')
+            ->get();
+
+        return $offer;
+    }
+    //student dash
     public function getOffersInterview($student_id) {
         $offer = \DB::table('offers')
             ->join('areas', 'offers.area_id', '=', 'areas.id')
