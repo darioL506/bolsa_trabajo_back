@@ -47,6 +47,9 @@ Route::middleware(['cors'])->group(function () {
     Route::post('studentOffer', [InterviewController::class, 'newInterview']);
     Route::put('unsubInter/{inter_id}',[InterviewController::class, 'unsubInter']);
     Route::put('unsubAcept/{inter_id}',[InterviewController::class, 'aceptInter']);
+    //Rutas gestion oferta/empresa
+    Route::post('studentOfferCompany', [InterviewController::class, 'gestInterview']);
+
 
 
 
