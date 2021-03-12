@@ -120,8 +120,9 @@ class StudentController extends Controller
         ->join('students', 'students.id', '=', 'interviews.student_id')
         ->join('users', 'users.id', '=', 'students.user_id')
         ->where('offers.company_id', '=', $company_id)
+            ->where('interviews.Joined_by', '=', 0)
             ->where('interviews.isActive', '=', 0)
-            ->get(['offers.name AS offer_name', 'students.*', 'interviews.*', 'users.*']));
+            ->get(['offers.name AS offer_name', 'interviews.id AS interview_id', 'students.*', 'interviews.*', 'users.*']));
         return response()->json($data, 200);
     }
 
