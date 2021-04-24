@@ -18,7 +18,8 @@
         "laravel/ui": "^3.2",
         "ext-pdo_sqlite": "*",
         "facade/ignition": "^2.5",
-        "fakerphp/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1",
+        "ext-mysqli": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

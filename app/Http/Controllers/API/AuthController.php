@@ -7,17 +7,18 @@ use App\Http\Controllers\StudentController;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
+use mysql_xdevapi\Exception;
 
 class AuthController extends Controller
 {
     //
     public function register(Request $request)
     {
-
         // REGISTRO
         if (User::where('email', $request->get('email'))->count() == 1) {
             return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
