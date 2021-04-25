@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StudentController;
+use App\Mail\MailForgetPass;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -141,5 +143,11 @@ class AuthController extends Controller
         $user->save();
 
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
+    }
+
+    public function forgetPass() {
+        Mail::to('dario.churriego@gmail.com')->send(new MailForgetPass());
+
+        return response()->json(['message'=> 'A message has been sent to Mailtrap!']);
     }
 }
