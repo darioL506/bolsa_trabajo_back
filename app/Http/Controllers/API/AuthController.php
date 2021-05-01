@@ -145,9 +145,36 @@ class AuthController extends Controller
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
     }
 
-    public function forgetPass() {
-        Mail::to('dario.churriego@gmail.com')->send(new MailForgetPass());
+    public function forgetPass(Request $request) {
+        $email = $request->get('email');
+
+        $user = User::where('email', $email)->first();
+
+        // Si no existe esa oferta devolvemos un error.
+        if (!$user) {
+            return response()->json(['code' => 404, 'message' => 'No se encuentra el usuario indicado'], 404);
+        }
+
+        $newPass = $this->generateRandomString();
+
+        $password = Hash::make($newPass);
+
+        $user->password = $password;
+
+        $user->save();
+
+        Mail::to($email)->send(new MailForgetPass($email,$newPass));
 
         return response()->json(['message'=> 'A message has been sent to Mailtrap!']);
+    }
+
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

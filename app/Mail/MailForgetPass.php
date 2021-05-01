@@ -11,13 +11,18 @@ class MailForgetPass extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $name;
+    private $newPass;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name,$newPass)
     {
+        $this->name = $name;
+        $this->newPass = $newPass;
         //
     }
 
@@ -30,10 +35,11 @@ class MailForgetPass extends Mailable
     {
         {
             return $this->from('mail@example.com', 'Mailtrap')
-                ->subject('Mailtrap Confirmation')
-                ->markdown('mails.exmpl')
+                ->subject('Contraseña olvidada')
+                ->markdown('mails.forgotPass')
                 ->with([
-                    'name' => 'New Mailtrap User',
+                    'name' => $this->name,
+                    'newPass' => $this->newPass,
                     'link' => '/inboxes/'
                 ]);
         }
