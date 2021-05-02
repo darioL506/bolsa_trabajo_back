@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StudentController;
 use App\Mail\MailForgetPass;
+use App\Models\Company;
+use App\Models\Student;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
@@ -150,9 +152,25 @@ class AuthController extends Controller
 
         $user = User::where('email', $email)->first();
 
-        // Si no existe esa oferta devolvemos un error.
+        // Si no devolvemos un error.
         if (!$user) {
             return response()->json(['code' => 404, 'message' => 'No se encuentra el usuario indicado'], 404);
+        }
+
+        $rol = UserRolesController::getRol($user->id)->rol_id;
+
+        $name = "";
+
+        $id = $user->id;
+
+        if($rol == 3) {
+            $st = Student::where('user_id', $id)->first();
+            $name = $st->name;
+        } elseif ($rol == 4) {
+            $cp = Company::where('user_id',$user->id)->first();
+            $name = $cp->name;
+        } else {
+            $name = $email;
         }
 
         $newPass = $this->generateRandomString();
@@ -163,7 +181,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        Mail::to($email)->send(new MailForgetPass($email,$newPass));
+        Mail::to($email)->send(new MailForgetPass($name,$newPass));
 
         return response()->json(['message'=> 'A message has been sent to Mailtrap!']);
     }
