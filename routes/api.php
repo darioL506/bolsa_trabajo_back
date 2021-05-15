@@ -30,6 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Métodos
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('forgetPass', [AuthController::class, 'forgetPass']);
 
 Route::middleware(['cors'])->group(function () {
     Route::put('offers/active/{id}', [OfferController::class, 'activeOffer']); // Activa oferta

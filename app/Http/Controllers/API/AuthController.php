@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StudentController;
+use App\Mail\MailForgetPass;
+use App\Models\Company;
+use App\Models\Student;
 use App\Models\User;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
@@ -11,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -141,5 +145,54 @@ class AuthController extends Controller
         $user->save();
 
         return response()->json(['code' => 200, 'message' => 'Usuario ' . $user . ' actualizado.'], 200);
+    }
+
+    public function forgetPass(Request $request) {
+        $email = $request->get('email');
+
+        $user = User::where('email', $email)->first();
+
+        // Si no devolvemos un error.
+        if (!$user) {
+            return response()->json(['code' => 404, 'message' => 'No se encuentra el usuario indicado'], 404);
+        }
+
+        $rol = UserRolesController::getRol($user->id)->rol_id;
+
+        $name = "";
+
+        $id = $user->id;
+
+        if($rol == 3) {
+            $st = Student::where('user_id', $id)->first();
+            $name = $st->name;
+        } elseif ($rol == 4) {
+            $cp = Company::where('user_id',$user->id)->first();
+            $name = $cp->name;
+        } else {
+            $name = $email;
+        }
+
+        $newPass = $this->generateRandomString();
+
+        $password = Hash::make($newPass);
+
+        $user->password = $password;
+
+        $user->save();
+
+        Mail::to($email)->send(new MailForgetPass($name,$newPass));
+
+        return response()->json(['message'=> 'A message has been sent to Mailtrap!']);
+    }
+
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
