@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\UserRol;
+use finfo;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UserRolesController;
@@ -75,20 +77,18 @@ class AuthController extends Controller
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
 
-        $img = $us->Avatar;
-
         if ($us->isActive === 1) {
             $rol = UserRolesController::getRol($us->id);
             if ($rol->rol_id === 4) {
                 $company = CompanyController::getCompany($us->id);
-                return response()->json(['message' => ['avatar'=>$img,'user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id, 'name' => $company->name], 'code' => 200], 200);
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'company_id' => $company->id, 'name' => $company->name], 'code' => 200], 200);
             } elseif ($rol->rol_id == 3) {
                 $student = StudentController::getStudent($us->id);
-                return response()->json(['message' => ['avatar'=>$img,'user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'student_id' => $student->id, 'name' => $student->name, 'lastnames' => $student->lastnames], 'code' => 200], 200);
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id, 'student_id' => $student->id, 'name' => $student->name, 'lastnames' => $student->lastnames], 'code' => 200], 200);
             } else {
-                return response()->json(['message' => ['avatar'=>$img,'user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
+                return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
             }
-            return response()->json(['message' => ['avatar'=>$img,'user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
+            return response()->json(['message' => ['user' => auth()->user(), 'access_token' => $accessToken, 'rol' => $rol->rol_id], 'code' => 200], 200);
         } else {
             return response()->json(['message' => 'Usuario desactivado,contacte con el administrador', 'code' => 400], 400);
         }
@@ -199,15 +199,43 @@ class AuthController extends Controller
         return $randomString;
     }
 
-    private function saveAvatar ($id,$img) {
+    public function saveAvatar (Request $request, $userId) {
 
-        // Get the contents of the file
+        //$img = explode(";base64,", $request->get('imgSrc'));
+
+        $img = '';
+
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $completeFileName = $img->getClientOriginalName();
+            //dd($completeFileName);
+        } else {
+            return response()->json(["Error"]);
+        }
+
+
         $contents = $img->openFile()->fread($img->getSize());
 
+        $user = User::where('id', $userId)->first();
+
+        if (!$user) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
+        }
         // Store the contents to the database
-        $user = User::find($id);
         $user->avatar = $contents;
         $user->save();
+    }
 
+    public function getAvatar($userId) {
+        // Find the user
+        $user = User::where('id', $userId)->first();
+
+        /*$pic = $user->avatar;
+
+        return response()->json(utf8_encode($pic));*/
+
+        return response()->make($user->avatar, 200, array(
+            'Content-Type' => (new finfo(FILEINFO_MIME))->buffer($user->avatar)
+        ));
     }
 }

@@ -73,7 +73,7 @@ class StudentController extends Controller
             $stAr->save();
         }
 
-        return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizado.','data'=>$data], 200);
+        return response()->json(['code' => 200, 'message' => 'Alumno ' . $alumno . ' actualizado.'], 200);
     }
     public function deleteStudent($student)
     {
