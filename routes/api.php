@@ -64,6 +64,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('offers', [OfferController::class, 'store']); // Guarda una nueva oferta
     Route::put('offers/{offer}', [OfferController::class, 'update']); // Acualiza oferta
     Route::delete('offers/{offer}', [OfferController::class, 'delete']); // Elimina oferta
+    Route::get('getStudentsFromInterview/{offerId}', [InterviewController::class, 'getStudentsFromInterview']); // Recupera los datos de alumnos apuntados en una oferta
 
 
     // Rutas para compañias

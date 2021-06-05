@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Interview;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use mysql_xdevapi\RowResult;
 
 class InterviewController extends Controller
 {
@@ -86,5 +87,24 @@ class InterviewController extends Controller
         $inter->save();
 
         return response()->json(['code' => 201, 'message' => 'Datos eliminados: ', 'data' => $inter], 201);
+    }
+
+    public function getStudentsFromInterview ($offerId) {
+        $students = \DB::table('students')
+            ->join('interviews','students.id','=','interviews.student_id')
+            ->join('users','students.user_id','=','users.id')
+            ->select(
+                'students.name',
+                'students.lastnames',
+                'students.dni',
+                'students.phone',
+                'users.email'
+            )
+            ->where('interviews.offer_id','=',$offerId)
+            ->get();
+        if (count($students) < 1) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'Error al buscar'])], 404);
+        }
+        return response()->json(['code' => 202, 'message' => 'Datos encontrados: ', 'data' => $students], 202);
     }
 }
