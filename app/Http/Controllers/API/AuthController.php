@@ -77,6 +77,8 @@ class AuthController extends Controller
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
 
+        $us->avatar = utf8_encode($us->avatar);
+
         if ($us->isActive === 1) {
             $rol = UserRolesController::getRol($us->id);
             if ($rol->rol_id === 4) {
@@ -229,6 +231,10 @@ class AuthController extends Controller
     public function getAvatar($userId) {
         // Find the user
         $user = User::where('id', $userId)->first();
+
+        if($user->avatar == null) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'El usuario no tiene avatar', 'data' => null])], 404);
+        }
 
         /*$pic = $user->avatar;
 

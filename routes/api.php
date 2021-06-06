@@ -107,3 +107,4 @@ Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
 //Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
+
