@@ -92,11 +92,15 @@ class StudentController extends Controller
 
     public function getAll()
     {
-        $data = json_encode(\DB::table('student_areas')
+        $data = \DB::table('student_areas')
             ->join('areas', 'student_areas.area_id', '=', 'areas.id')
             ->join('students', 'students.user_id', '=', 'student_areas.user_id')
             ->join('users','users.id','=','student_areas.user_id')
-            ->get());
+            ->get();
+        foreach ($data as $dat) {
+            $dat->avatar = null;
+        }
+        $data = json_encode($data);
         return response()->json($data, 200);
     }
 
