@@ -11,11 +11,17 @@ class CompanyController extends Controller
 
     public function insertCompany(Request $request)
     {
+        $id = $request->get('id');
+        $cif = $request->get('dni');
 
+        if (Student::where('cif', $cif)->count() == 1) {
+            User::where('id',$id)->delete();
+            return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
+        }
 
         $cp = new Company();
-        $cp->user_id = $request->get('id');
-        $cp->cif = $request->get('cif');
+        $cp->user_id = $id;
+        $cp->cif = $cif;
         $cp->foundation = implode("-", $request->get('birthdate'));
         $cp->name = $request->get('name');
         $cp->section = $request->get('sector');

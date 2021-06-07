@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\StudentArea;
+use App\Models\User;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use DateTime;
+use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
 use PHPUnit\Util\Json;
 
 class StudentController extends Controller
@@ -19,12 +22,19 @@ class StudentController extends Controller
     }
     public function insertStudents(Request $request)
     {
+
         $id = $request->get('id');
+        $dni = $request->get('dni');
+
+        if (Student::where('dni', $dni)->count() == 1) {
+            User::where('id',$id)->delete();
+            return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
+        }
 
         $st = new Student();
         $st->name = $request->get('name');
         $st->lastnames = $request->get('lastName');
-        $st->dni = $request->get('dni');
+        $st->dni = $dni;
         $st->user_id = $id;
         $st->birthdate = implode("-", $request->get('birthdate'));
         $st->phone = $request->get('phone');
@@ -42,6 +52,8 @@ class StudentController extends Controller
         }
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st], 201);
+
+
     }
 
     public function updateStudent(Request $request, $user_Id)
