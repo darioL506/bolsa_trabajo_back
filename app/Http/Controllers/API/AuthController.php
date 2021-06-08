@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\UserRol;
+use finfo;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -75,6 +77,9 @@ class AuthController extends Controller
 
         // Recuperamos el rol_id del usuario
         $us = auth()->user();
+
+        $us->avatar = utf8_encode($us->avatar);
+
         if ($us->isActive === 1) {
             $rol = UserRolesController::getRol($us->id);
             if ($rol->rol_id === 4) {
@@ -195,5 +200,49 @@ class AuthController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function saveAvatar (Request $request, $userId) {
+
+        //$img = explode(";base64,", $request->get('imgSrc'));
+
+        $img = '';
+
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $completeFileName = $img->getClientOriginalName();
+            //dd($completeFileName);
+        } else {
+            return response()->json(["Error"]);
+        }
+
+
+        $contents = $img->openFile()->fread($img->getSize());
+
+        $user = User::where('id', $userId)->first();
+
+        if (!$user) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'No se encuentra el usuario indicado ' . $user])], 404);
+        }
+        // Store the contents to the database
+        $user->avatar = $contents;
+        $user->save();
+    }
+
+    public function getAvatar($userId) {
+        // Find the user
+        $user = User::where('id', $userId)->first();
+
+        if($user->avatar == null) {
+            return response()->json(['errors' => array(['code' => 404, 'message' => 'El usuario no tiene avatar', 'data' => null])], 404);
+        }
+
+        /*$pic = $user->avatar;
+
+        return response()->json(utf8_encode($pic));*/
+
+        return response()->make($user->avatar, 200, array(
+            'Content-Type' => (new finfo(FILEINFO_MIME))->buffer($user->avatar)
+        ));
     }
 }

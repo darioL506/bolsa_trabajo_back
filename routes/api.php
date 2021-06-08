@@ -90,7 +90,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('areas/{area_id}', [AreaController::class, 'delete']);
     Route::post('areas/insert', [AreaController::class, 'newArea']);
     Route::put('areas/{area_id}', [AreaController::class, 'update']);
+
+    //Foto
+
 });
+
+Route::post('saveAvatar/{user_id}', [AuthController::class, 'saveAvatar']);
+Route::get('getAvatar/{user_id}', [AuthController::class, 'getAvatar']);
 
 // Rutas para Areas
 Route::get('areas', [AreaController::class, 'index']); // Devuelve todas las areas
@@ -102,3 +108,4 @@ Route::get('student/get-all', [StudentController::class, 'getAll']);
 Route::get('student/{user_Id}', [StudentController::class, 'get']);
 //Rutas para empresa
 Route::post('company/insert', [CompanyController::class, 'insertCompany']);
+
