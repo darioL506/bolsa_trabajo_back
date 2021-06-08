@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailRegister;
 use App\Models\Area;
 use App\Models\StudentArea;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use mysql_xdevapi\Exception;
 use PHPUnit\Util\Json;
 
@@ -50,6 +52,14 @@ class StudentController extends Controller
             $stAr->area_id = $area;
             $stAr->save();
         }
+
+        $us = User::where('id',$id)->first();
+
+        $name = $request->get('name') . ' ' .$request->get('lastName');
+
+        $email = $us->email;
+
+        Mail::to($email)->send(new MailRegister($name));
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $st], 201);
 

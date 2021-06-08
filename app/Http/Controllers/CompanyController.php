@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailRegister;
 use App\Models\Student;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyController extends Controller
 {
@@ -14,7 +17,7 @@ class CompanyController extends Controller
         $id = $request->get('id');
         $cif = $request->get('dni');
 
-        if (Student::where('cif', $cif)->count() == 1) {
+        if (Company::where('cif', $cif)->count() == 1) {
             User::where('id',$id)->delete();
             return response()->json(['message' => 'Registro incorrecto. Revise las credenciales.', 'code' => 400], 400);
         }
@@ -27,6 +30,14 @@ class CompanyController extends Controller
         $cp->section = $request->get('sector');
         $cp->description = $request->get('description');
         $cp->save();
+
+        $us = User::where('id',$id)->first();
+
+        $name = $request->get('name');
+
+        $email = $us->email;
+
+        Mail::to($email)->send(new MailRegister($name));
 
         return response()->json(['code' => 201, 'message' => 'Datos insertados: ' . $cp], 201);
     }

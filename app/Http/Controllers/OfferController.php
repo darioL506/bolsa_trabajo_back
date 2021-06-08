@@ -34,7 +34,14 @@ class OfferController extends Controller
             )
             ->where('offers.company_id', '=', $id)
             ->get();
-
+        foreach ($offer as $key => $off) {
+            $students = \DB::table('interviews')
+                ->join('offers','interviews.offer_id','=','offers.id')
+                ->where('interviews.offer_id','=',$off->id)
+                ->count();
+            $off->students = $students;
+            $offer[$key] = $off;
+        }
         return $offer;
     }
 

@@ -34,7 +34,7 @@ class MailForgetPass extends Mailable
     public function build()
     {
         {
-            return $this->from('no@reply.com', 'Mailtrap')
+            return $this->from('no@reply.com', 'CIFP Virgen de Gracia, Bolsa de Trabajo')
                 ->subject('Contraseña olvidada')
                 ->markdown('mails.forgotPass')
                 ->with([
