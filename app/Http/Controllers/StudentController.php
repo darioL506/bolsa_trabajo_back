@@ -129,13 +129,17 @@ class StudentController extends Controller
     public function getAcepted($company_id)
     {
 
-        $data = json_encode(\DB::table('offers')
+        $data = \DB::table('offers')
         ->join('interviews', 'interviews.offer_id', '=', 'offers.id')
         ->join('students', 'students.id', '=', 'interviews.student_id')
         ->join('users', 'users.id', '=', 'students.user_id')
         ->where('offers.company_id','=',$company_id)
         ->where('interviews.isActive', '=', 2)
-        ->get(['offers.name AS offer_name','students.*','interviews.*','users.*']));
+        ->get(['offers.name AS offer_name','students.*','interviews.*','users.*']);
+        foreach ($data as $dat) {
+            $dat->avatar = null;
+        }
+        $data = json_encode($data);
         return response()->json($data, 200);
     }
     public function waitInter($company_id)
